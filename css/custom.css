@@ -1,0 +1,377 @@
+body {
+    margin: 0;
+}
+
+.header {
+    background-color: white;
+    display: flex;
+    -webkit-box-pack: space-around;
+    -ms-flex-pack: space-around;
+    justify-content: space-around;
+    box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    -ms-flex-align: center;
+    z-index: 1;
+}
+
+.header-wrap {
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    max-width: 1300px;
+    /* padding-right: 24px;
+    padding-left: 20px; */
+}
+
+.div-header-right {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.logo-img {
+    width: 250px;
+}
+
+.btn2 {
+    border: 0px;
+    padding: 8px 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    min-height: 35px;
+    cursor: pointer;
+    max-width: 10rem;
+}
+
+.btn-mw-none {
+    max-width: 100rem;
+}
+
+.btn2:hover {
+    color: white;
+}
+
+.btn-login {
+    background-color: rgb(20 229 229);
+    color: white;
+    text-decoration: none;
+    font-weight: 750;
+}
+
+.btn-login:hover {
+    background-color: rgb(24 195 195);
+}
+
+header {
+    position: absolute;
+    top: 0;
+}
+
+.mt-custom {
+    margin-top: 5rem;
+}
+
+.btn-outline-blue {
+    color: rgb(20 229 229);
+    text-decoration: none;
+    font-weight: 750;
+    border: 1px solid rgb(20 229 229);
+    background-color: white;
+}
+
+.btn-outline-blue:hover {
+    color: rgb(20 229 229);
+    background-color: rgb(24 195 195 / 8%);
+}
+
+.btn-outline-red {
+    color: rgb(229 20 20);
+    text-decoration: none;
+    font-weight: 750;
+    border: 1px solid rgb(229 20 20);
+    background-color: white;
+}
+
+.btn-outline-red:hover {
+    color: rgb(229 20 20);
+    background-color: rgba(155, 0, 0, 0.08);
+}
+
+.bg-red {
+    background-color: #ff000040;
+    border-radius: 0.25rem;
+    margin: 0.875rem;
+    padding: 1rem;
+    animation: danger 1.75s infinite;
+}
+
+@keyframes danger {
+    0% {
+        background-color: #ff000040;
+    }
+    50% {
+        background-color: #ff000057;
+    }
+    100% {
+        background-color: #ff000040;
+    }
+}
+
+.prof-pic {
+    object-fit: cover;
+    width:2.5rem;
+    height: 2.5rem;
+    margin-left: 2rem;
+    border-radius: 50%;
+}
+
+.prof-pic-crud {
+    margin-left: 0;
+}
+
+.wrap-center {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-template-areas:
+        ". a a ."
+        ". a a .";
+}
+
+.item-center {
+    grid-area: a;
+    align-self: center;
+    justify-self: center;
+}
+
+.btn-admin {
+    background-color: rgb(229 20 20);
+    color: white;
+    text-decoration: none;
+    font-weight: 750;
+}
+
+.btn-admin:hover {
+    background-color: rgb(195 24 24);
+}
+
+.ml-2rem {
+    margin-left: 2rem;
+}
+
+.sub-menu {
+    display: none;
+    position: fixed;
+}
+
+div.p-relative {
+    position: relative;
+    right: 5rem;
+    top: 0.595rem;
+}
+
+.drop-content {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    height: 13rem;
+}
+
+.drop-content .d-flex {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+ul.ul_drop li:hover .sub-menu {
+    display: block;
+}
+
+.f-left {
+    float: left;
+    margin-right: 2rem;
+}
+
+.f-right {
+    float: right;
+    margin-right: 2rem;
+}
+
+.f-right h3 {
+    margin-bottom: -0.5rem;
+}
+
+.prof-pic2 {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.t-center {
+    text-align: center;
+}
+
+.hr-prof {
+    background-color: #3e3e3e;
+    width: 90%;
+    margin: 1rem auto;
+    height: 0.12rem!important;
+}
+
+.div-modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    padding-top: 100px;
+    padding: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    padding-left: 3rem;
+    border: 1px solid #888;
+    width: 1200px;
+    max-width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.r-pos {
+    position: absolute;
+    right: 1.5rem;
+    justify-self: flex-end;
+}
+
+.r-pos2 {
+    bottom: 1.5rem;
+    right: 2rem;
+}
+
+.btn-none {
+    background-color: transparent;
+    border: 0px;
+    width: 0px;
+}
+
+.btn-cancel {
+    width: 7.55rem;
+    margin-right: 1rem;
+    background-color: #efefef;
+}
+
+.btn-cancel:hover {
+    background-color: #dfdfdf;
+    color: #000;
+}
+
+.margint-2 {
+    margin-top: 2rem;
+}
+
+.marginb-4 {
+    margin-bottom: 4rem;
+}
+
+.p-fixed{
+    position: fixed;
+    width: 23.5%;
+    padding-right: 20px;
+}
+
+.side-nav {
+    max-height: 90%;
+}
+
+.ofy-auto {
+    overflow-y: scroll;
+}
+
+.w-90 {
+    width: 90%;
+    max-width: 100%;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: rgb(145, 145, 145);
+}
+
+.list_item {
+    background-color: #F1F1F1;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    margin: 5px 15px 2px;
+    padding: 2px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.show_more_main {
+    margin: 15px 25px;
+}
+.show_more {
+    background-color: #f8f8f8;
+    background-image: -webkit-linear-gradient(top,#fcfcfc 0,#f8f8f8 100%);
+    background-image: linear-gradient(top,#fcfcfc 0,#f8f8f8 100%);
+    border: 1px solid;
+    border-color: #d3d3d3;
+    color: #333;
+    font-size: 12px;
+    outline: 0;
+}
+.show_more {
+    cursor: pointer;
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    font-weight:bold;
+}
+.loding {
+    background-color: #e9e9e9;
+    border: 1px solid;
+    border-color: #c6c6c6;
+    color: #333;
+    font-size: 12px;
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    outline: 0;
+    font-weight:bold;
+}
+.loding_txt {
+    background-image: url(loading.gif);
+    background-position: left;
+    background-repeat: no-repeat;
+    border: 0;
+    display: inline-block;
+    height: 16px;
+    padding-left: 20px;
+}
