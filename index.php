@@ -323,6 +323,9 @@
             </div>
         </div>
     </div>
+    <div id="button-up" class="button-up">
+        <i class="fas fa-chevron-up"></i>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -362,6 +365,30 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+
+        document.getElementById("button-up").addEventListener("click", scrollUp);
+
+        function scrollUp(){
+            var currentScroll = document.documentElement.scrollTop;
+
+            if (currentScroll > 0){
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+        }
+
+        buttonUp = document.getElementById("button-up");
+
+        window.onscroll = function(){
+
+            var scroll = document.documentElement.scrollTop;
+
+            if (scroll > 500){
+                buttonUp.classList.add("button-scale");
+            }else if(scroll < 500){
+                buttonUp.classList.remove("button-scale");
+            }
+
         }
     </script>
 </body>
