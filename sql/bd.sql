@@ -16,8 +16,16 @@ CREATE TABLE users (
     img VARCHAR(100)
 );
 
-INSERT INTO users VALUE 
-(null,'cespin@insdanielblanxart.cat','cespin10','Cristian98','Cristian','Espinosa','674638964','Hola soy Cristian',1,1,'default-img.jpg');
+INSERT INTO users VALUES 
+(null,'cespin@insdanielblanxart.cat','cespin10','Cristian98','Cristian','Espinosa','674638964','Hola soy Cristian',1,1,'default-img.jpg'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg');
 
 CREATE TABLE posts (
     id_post INT PRIMARY KEY AUTO_INCREMENT,
@@ -25,5 +33,9 @@ CREATE TABLE posts (
     FOREIGN KEY (id_user) REFERENCES users(id_user),
     img VARCHAR(100),
     date DATE,
-    descrip VARCHAR(200)
+    descrip VARCHAR(200),
+    likes INT
 );
+
+INSERT INTO posts VALUE
+(null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',2194);

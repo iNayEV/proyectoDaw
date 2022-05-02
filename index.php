@@ -81,7 +81,6 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="p-fixed ofy-auto side-nav">
-
                     <!-- <div>
                         <a class="d-flex align-items-center text-pink h5">
                             <i class="fas fa-home"></i>
@@ -179,131 +178,63 @@
             </div>
             <div class="col-sm-8">
                 <div class="mb-5">
-                    <div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex">
-                                <img class="suggestedAccountIcon" src="img/perfil.jpg">
+                    <?php
+                        $sql = "SELECT * FROM posts LIMIT 4";
+                        $result = mysqli_query($con, $sql);
+                        $rows = mysqli_num_rows($result);
+                        if ($rows > 0) {
+                            while ($reg = mysqli_fetch_array($result)) {
+                                $id = $reg["id_post"];
+                                $img = "uploads/".$reg["img"];
+                                $desc = $reg["descrip"];
+                                $likes = $reg["likes"];
+                                ?>
                                 <div>
-                                    <h6 class="mb-0 fw-bold">
-                                        therock <i class="fas fa-check-circle text-blue"></i>
-                                    </h6>
-                                    <small>Grupo de amigos se juntan para hacer una paja grupal.</small>
-                                </div>
-                            </div>
-                            <a href="#" class="btn2 btn-outline-blue">
-                                Seguir
-                            </a>
-                        </div>
-                        <div class="wrap-center">
-                            <div class="mt-3 d-flex align-items-end item-center">
-                                <img src="img/screen.png" class="tikTok_screen_img">
-                                <div class="ms-3">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="actions_tikTok">
-                                            <i class="fas fa-heart"></i>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex" style="align-items: center;">
+                                            <img class="suggestedAccountIcon prof-pic" src="<?php echo $img ?>">
+                                            <div>
+                                                <h6 class="mb-0 fw-bold">
+                                                    therock 
+                                                    <!-- <?php 
+                                                        if ($reg["administrator"] == 1) {
+                                                            ?>
+                                                                <i class="fas fa-check-circle text-blue"></i>
+                                                            <?php
+                                                        }
+                                                    ?> -->
+                                                </h6>
+                                                <small><?php echo $desc ?></small>
+                                            </div>
                                         </div>
-                                        <span>42.0K</span>
+                                        <a href="#" class="btn2 btn-outline-blue">
+                                            Seguir
+                                        </a>
                                     </div>
-                                    <div class="d-flex flex-column align-items-center my-4">
-                                        <div class="actions_tikTok">
-                                            <i class="fas fa-comment-dots"></i>
+                                    <div class="wrap-center">
+                                        <div class="mt-3 d-flex align-items-end item-center">
+                                            <img src="<?php echo $img ?>" class="tikTok_screen_img">
+                                            <div class="ms-3">
+                                                <div class="d-flex flex-column align-items-center">
+                                                    <div class="actions_tikTok">
+                                                        <i class="fas fa-heart"></i>
+                                                    </div>
+                                                    <span id="likes"><?php echo $likes ?></span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <span>42.0K</span>
-                                    </div>
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="actions_tikTok">
-                                            <i class="fas fa-share"></i>
-                                        </div>
-                                        <span>42.0K</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="my-5">
-                    <div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex">
-                                <img class="suggestedAccountIcon" src="img/perfil.jpg">
-                                <div>
-                                    <h6 class="mb-0 fw-bold">
-                                        therock <i class="fas fa-check-circle text-blue"></i>
-                                    </h6>
-                                    <small>grupo de amigos se juntan para hacer una paja grupal.</small>
-                                </div>
-                            </div>
-                            <a href="#" class="btn2 btn-outline-blue">
-                                Seguir
-                            </a>
-                        </div>
-                        <div class="wrap-center">
-                            <div class="mt-3 d-flex align-items-end item-center">
-                                <img src="img/screen.png" class="tikTok_screen_img">
-                                <div class="ms-3">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="actions_tikTok">
-                                            <i class="fas fa-heart"></i>
-                                        </div>
-                                        <span>42.0K</span>
-                                    </div>
-                                    <div class="d-flex flex-column align-items-center my-4">
-                                        <div class="actions_tikTok">
-                                            <i class="fas fa-comment-dots"></i>
-                                        </div>
-                                        <span>42.0K</span>
-                                    </div>
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="actions_tikTok">
-                                            <i class="fas fa-share"></i>
-                                        </div>
-                                        <span>42.0K</span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="my-5">
-                    <div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex">
-                                <img class="suggestedAccountIcon" src="img/perfil.jpg">
-                                <div>
-                                    <h6 class="mb-0 fw-bold">
-                                        therock <i class="fas fa-check-circle text-blue"></i>
-                                    </h6>
-                                    <small>grupo de amigos se juntan para hacer una paja grupal.</small>
-                                </div>
-                            </div>
-                            <a href="#" class="btn2 btn-outline-blue">
-                                Seguir
-                            </a>
-                        </div>
-                        <div class="wrap-center">
-                            <div class="mt-3 d-flex align-items-end item-center">
-                                <img src="img/screen.png" class="tikTok_screen_img">
-                                <div class="ms-3">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="actions_tikTok">
-                                            <i class="fas fa-heart"></i>
-                                        </div>
-                                        <span>42.0K</span>
-                                    </div>
-                                    <div class="d-flex flex-column align-items-center my-4">
-                                        <div class="actions_tikTok">
-                                            <i class="fas fa-comment-dots"></i>
-                                        </div>
-                                        <span>42.0K</span>
-                                    </div>
-                                    <div class="d-flex flex-column align-items-center">
-                                        <div class="actions_tikTok">
-                                            <i class="fas fa-share"></i>
-                                        </div>
-                                        <span>42.0K</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                <hr class="my-5">
+                                <?php
+                            } ?>
+                            <!-- <div class="show_more_main" id="show_more_main<?php echo $id; ?>">
+                                <span id="<?php echo $id; ?>" class="show_more" title="Load more posts">Show more</span>
+                                <span class="loding" style="display: none;"><span class="loding_txt">Loading...</span></span>
+                            </div> -->
+                            <?php
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -326,6 +257,50 @@
     <div id="button-up" class="button-up">
         <i class="fas fa-chevron-up"></i>
     </div>
+    <script>
+        function convertNum() {
+            var likes = document.getElementById("likes");
+            var num = likes.textContent;
+            num = Math.round(num/100)*100;
+            num = num.toString();
+            console.log(num);
+            while (num[num.length-1] == "0") {           
+                num = num.slice(0, -1);
+                if (num[num.length-1] != "0") {break;}
+            }
+            var result = num.toString().replace(/\B(?=(\d{1})+(?!\d))/g, ",");
+            console.log(result);
+            /* result = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); */
+            likes.innerHTML = result+"K";
+        }
+        
+        convertNum();
+    </script>
+    <script>
+        document.getElementById("button-up").addEventListener("click", scrollUp);
+
+        function scrollUp(){
+            var currentScroll = document.documentElement.scrollTop;
+
+            if (currentScroll > 0){
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+        }
+
+        buttonUp = document.getElementById("button-up");
+
+        window.onscroll = function(){
+
+            var scroll = document.documentElement.scrollTop;
+
+            if (scroll > 500){
+                buttonUp.classList.add("button-scale");
+            }else if(scroll < 500){
+                buttonUp.classList.remove("button-scale");
+            }
+
+        }
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -365,30 +340,6 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
-
-        document.getElementById("button-up").addEventListener("click", scrollUp);
-
-        function scrollUp(){
-            var currentScroll = document.documentElement.scrollTop;
-
-            if (currentScroll > 0){
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            }
-        }
-
-        buttonUp = document.getElementById("button-up");
-
-        window.onscroll = function(){
-
-            var scroll = document.documentElement.scrollTop;
-
-            if (scroll > 500){
-                buttonUp.classList.add("button-scale");
-            }else if(scroll < 500){
-                buttonUp.classList.remove("button-scale");
-            }
-
         }
     </script>
 </body>

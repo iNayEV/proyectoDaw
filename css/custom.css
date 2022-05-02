@@ -300,8 +300,8 @@ ul.ul_drop li:hover .sub-menu {
 
 .p-fixed{
     position: fixed;
-    width: 23.5%;
-    padding-right: 20px;
+    width: 22.5%;
+    padding-right: 10px;
 }
 
 .side-nav {
@@ -309,7 +309,7 @@ ul.ul_drop li:hover .sub-menu {
 }
 
 .ofy-auto {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .w-90 {
@@ -383,17 +383,47 @@ a:hover {
     transition: 0.3s;
     transform: scale(0);
     cursor: pointer;
+    background-color: #13b1b1;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.button-up:hover {
+    background-color: #00ffff;
 }
 
 .button-scale {
     transform: scale(1);
 }
 
-.contenedor::-webkit-scrollbar {
-    width: 7px;
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-.contenedor::-webkit-scrollbar-thumb {
-    background: #ff9d00;
-    border-radius: 5px;
+::-webkit-scrollbar-track {
+    background-color: rgb(223, 223, 223);
+    border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(97, 97, 97);
+    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+    border-radius: 100px;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(114, 114, 114);
+}
+
+html {
+    scrollbar-color: #6969dd #e0e0e0;
+    scrollbar-width: thin;
+}
+
+.button-up i {
+    margin: 0 auto;
 }
