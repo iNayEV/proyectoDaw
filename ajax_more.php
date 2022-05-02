@@ -28,8 +28,8 @@ if(!empty($_POST["id"])){
             $lastname = $reg["lastname"];
             ?>
             <li class="mb-4">
-                <div class="d-flex">
-                    <img class="suggestedAccountIcon" src="<?php echo $img ?>">
+                <div class="d-flex" style="align-items: center;">
+                    <img class="suggestedAccountIcon prof-pic" src="<?php echo $img ?>">
                     <div>
                         <h6 class="mb-0 fw-bold">
                             <?php echo $firstname ?> <?php echo $lastname ?>

@@ -20,7 +20,7 @@
             <div class="header-wrap">
                 <a href="/"><img class="logo-img" src="img/logo-example.png" alt=""></a>
                 <?php
-                    if($_SESSION["user"]=="") {
+                    if(!isset($_SESSION["user"])) {
                         ?>
                             <a href="login.php" class="c-pointer"><button class="btn2 btn-login">Iniciar sesión</button></a>
                             <?php
@@ -46,7 +46,7 @@
                                                                     <img class="prof-pic prof-pic2" src="uploads/<?php echo $reg["img"] ?>" alt="">
                                                                 </div>
                                                                 <div class="f-right">
-                                                                    <h3><?php echo $reg["user"] ?></h3>
+                                                                    <h3><?php echo $reg["firstname"]." ".$reg["lastname"] ?></h3>
                                                                     <span>@<?php echo $reg["username"]?></span>
                                                                 </div>
                                                             </div>                                                            
@@ -94,7 +94,7 @@
                     </div> -->
                     <!-- <hr class="my-5"> -->
                     <?php 
-                        if ($_SESSION["user"] == "") {
+                        if (!isset($_SESSION["user"])) {
                             ?>
                             <div>
                                 <p>Inicia sesión para seguir creadores, dar like a videos, y ver comentarios.</p>
@@ -128,8 +128,8 @@
                                             $lastname = $reg["lastname"];
                                             ?>
                                             <li class="mb-4">
-                                                <div class="d-flex">
-                                                    <img class="suggestedAccountIcon" src="<?php echo $img ?>">
+                                                <div class="d-flex" style="align-items: center;">
+                                                    <img class="suggestedAccountIcon prof-pic" src="<?php echo $img ?>">
                                                     <div>
                                                         <h6 class="mb-0 fw-bold">
                                                             <?php echo $firstname ?> <?php echo $lastname ?>
