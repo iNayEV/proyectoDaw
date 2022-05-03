@@ -13,14 +13,16 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <link rel="stylesheet" href="css/custom.css">
     <?php 
-        $sql = "SELECT * FROM users WHERE username = '".$_SESSION["user"]."'";
-        $result = mysqli_query($con, $sql);
-        $reg = mysqli_fetch_array($result);
-        if ($reg["mode"]=="dark") {
-            ?>
-            <link rel="stylesheet" href="css/dark-mode.css">
-            <link rel="stylesheet" href="css/scroll-dark.css">
-            <?php
+        if (isset($_SESSION["user"])) {
+            $sql = "SELECT * FROM users WHERE username = '".$_SESSION["user"]."'";
+            $result = mysqli_query($con, $sql);
+            $reg = mysqli_fetch_array($result);
+            if ($reg["mode"]=="dark") {
+                ?>
+                <link rel="stylesheet" href="css/dark-mode.css">
+                <link rel="stylesheet" href="css/scroll-dark.css">
+                <?php
+            }
         } else {
             ?>
             <link rel="stylesheet" href="css/scroll-light.css">
@@ -47,6 +49,7 @@
                                 $sql = "SELECT * FROM users WHERE username = '".$_SESSION["user"]."'";
                                 $result = mysqli_query($con, $sql);
                                 $reg = mysqli_fetch_array($result);
+                                $id_user = $reg["id_user"];
                                 ?>
                                 <ul class="ul_drop">
                                     <li>
@@ -233,10 +236,28 @@
                                             <img src="<?php echo $post_img ?>" class="tikTok_screen_img">
                                             <div class="ms-3">
                                                 <div class="d-flex flex-column align-items-center" id="likes<?php echo $id ?>">
-                                                    <div class="actions_tikTok" id="<?php echo $id ?>">
-                                                        <i class="fas fa-heart"></i>
-                                                    </div>
-                                                    <span class="likes"><?php echo $likes ?></span>
+                                                    <?php 
+                                                        $sql = "SELECT * FROM likes WHERE id_user=".$id_user." AND id_post=".$id;
+                                                        $result = mysqli_query($con, $sql);
+                                                        $rows = mysqli_num_rows($result);
+                                                        if($rows > 0) {
+                                                            ?>
+                                                                <div class="like-red" id="<?php echo $id ?>">
+                                                                    <i class="fas fa-heart"></i>
+                                                                </div>
+                                                                <span class="likes"><?php echo $likes ?></span>
+                                                            <?php
+                                                        } else {
+                                                            ?>
+                                                                <div class="actions_tikTok" id="<?php echo $id ?>">
+                                                                    <i class="fas fa-heart"></i>
+                                                                </div>
+                                                                <span class="likes"><?php echo $likes ?></span>
+                                                            <?php
+                                                        }
+                                                        $sql = "SELECT * FROM posts INNER JOIN users ON posts.id_user=users.id_user WHERE id_post >".$id;
+                                                        $result = mysqli_query($con, $sql);
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -286,13 +307,16 @@
                         num = num.slice(0, -1);
                         if (num[num.length-1] != "0") {break;}
                     }
+                    console.log(num);
                     num_arr = num.split('');
-                    num = "";
-                    for(i = 0; i < num_arr.length; i++) {
-                        if (i + 1 == num_arr.length) {
-                            num = num+","+num_arr[i];
-                        } else {
-                            num = num+num_arr[i];
+                    if (num_arr.length > 1) {
+                        num = "";
+                        for(i = 0; i < num_arr.length; i++) {
+                            if (i + 1 == num_arr.length) {
+                                num = num+","+num_arr[i];
+                            } else {
+                                num = num+num_arr[i];
+                            }
                         }
                     }
                     element.innerHTML = num+"K";

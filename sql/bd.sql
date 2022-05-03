@@ -42,7 +42,7 @@ INSERT INTO posts VALUES
 (null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',1),
 (null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',23904),
 (null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',999),
-(null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',2194),
+(null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',2000),
 (null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',2194);
 
 CREATE TABLE likes (
