@@ -22,14 +22,14 @@ if(!empty($_POST["id"])){
     if($rows > 0){ 
         while($reg = mysqli_fetch_array($result)){
             $id = $reg["id_user"];
-            $img = "uploads/".$reg["img"];
+            $prof_img = "uploads/".$reg["prof_img"];
             $username = "@".$reg["username"];
             $firstname = $reg["firstname"];
             $lastname = $reg["lastname"];
             ?>
             <li class="mb-4">
                 <div class="d-flex" style="align-items: center;">
-                    <img class="suggestedAccountIcon prof-pic" src="<?php echo $img ?>">
+                    <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
                     <div>
                         <h6 class="mb-0 fw-bold">
                             <?php echo $firstname ?> <?php echo $lastname ?>

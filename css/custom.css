@@ -73,7 +73,20 @@ header {
 }
 
 .mt-custom {
-    margin-top: 5rem;
+    margin-top: 3.75rem;
+}
+
+.p-custom {
+    padding: 1rem 0;
+}
+
+.mr-custom {
+    margin-right: 2rem;
+}
+
+.w-custom {
+    margin: auto;
+    width: 95%;
 }
 
 .btn-outline-blue {
@@ -81,7 +94,7 @@ header {
     text-decoration: none;
     font-weight: 750;
     border: 1px solid rgb(20 229 229);
-    background-color: white;
+    background-color: transparent;
 }
 
 .btn-outline-blue:hover {

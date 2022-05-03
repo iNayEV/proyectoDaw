@@ -1,0 +1,17 @@
+body {
+    background-color: #181818;
+    color: white;
+}
+
+.header {
+    background-color: #191919;
+}
+
+.text-dark {
+    color: white!important;
+}
+
+.theme-dark {
+    background-color: #202020;
+    height: 100%;
+}

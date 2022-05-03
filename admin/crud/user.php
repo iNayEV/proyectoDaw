@@ -103,7 +103,7 @@
                                                     }
                                                 ?>
                                             </th>
-                                            <th><img class="prof-pic prof-pic-crud" src="../../uploads/<?php echo $row['img'] ?>" alt="" width="50rem" style="border-radius: 50%; max-width: 50rem max-height: 50rem"></th>  
+                                            <th><img class="prof-pic prof-pic-crud" src="../../uploads/<?php echo $row['prof_img'] ?>" alt="" width="50rem" style="border-radius: 50%; max-width: 50rem max-height: 50rem"></th>  
                                             <th class="text-center"><a href="actualizar.php?id=<?php echo $row['id_user'] ?>" class=""><i class="fa-solid fa-pen-to-square"></i></a></th>
                                             <th class="text-center"><a href="delete.php?id=<?php echo $row['id_user'] ?>" class=""><i class="fa-solid fa-trash-can"></i></a></th>                                        
                                         </tr>

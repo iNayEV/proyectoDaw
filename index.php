@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+    session_start();
+    include("sql/connect.php");
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,13 +12,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <link rel="stylesheet" href="css/custom.css">
+    <?php 
+        $sql = "SELECT * FROM users WHERE username = '".$_SESSION["user"]."'";
+        $result = mysqli_query($con, $sql);
+        $reg = mysqli_fetch_array($result);
+        if ($reg["mode"]=="dark") {
+            ?>
+            <link rel="stylesheet" href="css/dark-mode.css">
+            <?php
+        }
+    ?>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <?php
-        session_start();
-        include("sql/connect.php");
-    ?>
     <header>
         <div class="header">
             <div class="header-wrap">
@@ -35,7 +45,7 @@
                                 ?>
                                 <ul class="ul_drop">
                                     <li>
-                                        <img class="prof-pic" src="uploads/<?php echo $reg["img"] ?>" alt="">
+                                        <img class="prof-pic" src="uploads/<?php echo $reg["prof_img"] ?>" alt="">
                                         <div class="sub-menu">
                                             <div class="p-relative">
                                                 <ul>
@@ -43,7 +53,7 @@
                                                         <div class="drop-content">
                                                             <div class="d-flex">
                                                                 <div class="f-left">
-                                                                    <img class="prof-pic prof-pic2" src="uploads/<?php echo $reg["img"] ?>" alt="">
+                                                                    <img class="prof-pic prof-pic2" src="uploads/<?php echo $reg["prof_img"] ?>" alt="">
                                                                 </div>
                                                                 <div class="f-right">
                                                                     <h3><?php echo $reg["firstname"]." ".$reg["lastname"] ?></h3>
@@ -79,7 +89,7 @@
 
     <div class="container mt-custom">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4 p-custom">
                 <div class="p-fixed ofy-auto side-nav">
                     <!-- <div>
                         <a class="d-flex align-items-center text-pink h5">
@@ -121,14 +131,14 @@
                                     if ($rows > 0) {
                                         while ($reg = mysqli_fetch_array($result)) {
                                             $id = $reg["id_user"];
-                                            $img = "uploads/".$reg["img"];
+                                            $prof_img = "uploads/".$reg["prof_img"];
                                             $username = "@".$reg["username"];
                                             $firstname = $reg["firstname"];
                                             $lastname = $reg["lastname"];
                                             ?>
                                             <li class="mb-4">
                                                 <div class="d-flex" style="align-items: center;">
-                                                    <img class="suggestedAccountIcon prof-pic" src="<?php echo $img ?>">
+                                                    <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
                                                     <div>
                                                         <h6 class="mb-0 fw-bold">
                                                             <?php echo $firstname ?> <?php echo $lastname ?>
@@ -176,26 +186,28 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-8 theme-dark p-custom">
                 <div class="mb-5">
                     <?php
-                        $sql = "SELECT * FROM posts LIMIT 4";
+                        $sql = "SELECT * FROM posts INNER JOIN users ON posts.id_user=users.id_user";
                         $result = mysqli_query($con, $sql);
                         $rows = mysqli_num_rows($result);
                         if ($rows > 0) {
                             while ($reg = mysqli_fetch_array($result)) {
                                 $id = $reg["id_post"];
-                                $img = "uploads/".$reg["img"];
-                                $desc = $reg["descrip"];
+                                $post_img = "uploads/".$reg["post_img"];
+                                $desc = $reg["post_descrip"];
                                 $likes = $reg["likes"];
+                                $prof_img = "uploads/".$reg["prof_img"];
+                                $username = "@".$reg["username"];
                                 ?>
                                 <div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex" style="align-items: center;">
-                                            <img class="suggestedAccountIcon prof-pic" src="<?php echo $img ?>">
+                                            <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
                                             <div>
                                                 <h6 class="mb-0 fw-bold">
-                                                    therock 
+                                                    <?php echo $username ?>
                                                     <!-- <?php 
                                                         if ($reg["administrator"] == 1) {
                                                             ?>
@@ -207,25 +219,25 @@
                                                 <small><?php echo $desc ?></small>
                                             </div>
                                         </div>
-                                        <a href="#" class="btn2 btn-outline-blue">
+                                        <a href="#" class="btn2 btn-outline-blue mr-custom">
                                             Seguir
                                         </a>
                                     </div>
                                     <div class="wrap-center">
                                         <div class="mt-3 d-flex align-items-end item-center">
-                                            <img src="<?php echo $img ?>" class="tikTok_screen_img">
+                                            <img src="<?php echo $post_img ?>" class="tikTok_screen_img">
                                             <div class="ms-3">
                                                 <div class="d-flex flex-column align-items-center">
                                                     <div class="actions_tikTok">
                                                         <i class="fas fa-heart"></i>
                                                     </div>
-                                                    <span id="likes"><?php echo $likes ?></span>
+                                                    <span class="likes"><?php echo $likes ?></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <hr class="my-5">
+                                <hr class="my-5 w-custom">
                                 <?php
                             } ?>
                             <!-- <div class="show_more_main" id="show_more_main<?php echo $id; ?>">
@@ -259,7 +271,8 @@
     </div>
     <script>
         function convertNum() {
-            var likes = document.getElementById("likes");
+            var likes = document.getElementsByClassName("likes");
+            likes.forEach((element) => console.log(element.innerHTML));
             var num = likes.textContent;
             num = Math.round(num/100)*100;
             num = num.toString();
