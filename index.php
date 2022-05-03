@@ -19,6 +19,11 @@
         if ($reg["mode"]=="dark") {
             ?>
             <link rel="stylesheet" href="css/dark-mode.css">
+            <link rel="stylesheet" href="css/scroll-dark.css">
+            <?php
+        } else {
+            ?>
+            <link rel="stylesheet" href="css/scroll-light.css">
             <?php
         }
     ?>
@@ -272,19 +277,25 @@
     <script>
         function convertNum() {
             var likes = document.getElementsByClassName("likes");
-            likes.forEach((element) => console.log(element.innerHTML));
-            var num = likes.textContent;
-            num = Math.round(num/100)*100;
-            num = num.toString();
-            console.log(num);
-            while (num[num.length-1] == "0") {           
-                num = num.slice(0, -1);
-                if (num[num.length-1] != "0") {break;}
-            }
-            var result = num.toString().replace(/\B(?=(\d{1})+(?!\d))/g, ",");
-            console.log(result);
-            /* result = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); */
-            likes.innerHTML = result+"K";
+            Array.from(likes).forEach((element) => {
+                var num = element.textContent;
+                num = Math.round(num/100)*100;
+                num = num.toString();
+                while (num[num.length-1] == "0") {           
+                    num = num.slice(0, -1);
+                    if (num[num.length-1] != "0") {break;}
+                }
+                num_arr = num.split('');
+                num = "";
+                for(i = 0; i < num_arr.length; i++) {
+                    if (i + 1 == num_arr.length) {
+                        num = num+","+num_arr[i];
+                    } else {
+                        num = num+num_arr[i];
+                    }
+                }
+                element.innerHTML = num+"K";
+            });
         }
         
         convertNum();
