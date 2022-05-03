@@ -37,7 +37,7 @@
                 <?php
                     if(!isset($_SESSION["user"])) {
                         ?>
-                            <a href="login.php" class="c-pointer"><button class="btn2 btn-login">Iniciar sesión</button></a>
+                            <a href="login.php" class="c-pointer" style="margin-right: 1.25rem;"><button class="btn2 btn-login">Iniciar sesión</button></a>
                             <?php
                     }else{
                         ?>
@@ -192,7 +192,7 @@
                 </div>
             </div>
             <div class="col-sm-8 theme-dark p-custom">
-                <div class="mb-5">
+                <div class="mb-5 posts-list">
                     <?php
                         $sql = "SELECT * FROM posts INNER JOIN users ON posts.id_user=users.id_user";
                         $result = mysqli_query($con, $sql);
@@ -206,7 +206,7 @@
                                 $prof_img = "uploads/".$reg["prof_img"];
                                 $username = "@".$reg["username"];
                                 ?>
-                                <div>
+                                <div class="delete">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex" style="align-items: center;">
                                             <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
@@ -232,8 +232,8 @@
                                         <div class="mt-3 d-flex align-items-end item-center">
                                             <img src="<?php echo $post_img ?>" class="tikTok_screen_img">
                                             <div class="ms-3">
-                                                <div class="d-flex flex-column align-items-center">
-                                                    <div class="actions_tikTok">
+                                                <div class="d-flex flex-column align-items-center" id="likes<?php echo $id ?>">
+                                                    <div class="actions_tikTok" id="<?php echo $id ?>">
                                                         <i class="fas fa-heart"></i>
                                                     </div>
                                                     <span class="likes"><?php echo $likes ?></span>
@@ -241,8 +241,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <hr class="my-5 w-custom">
                                 </div>
-                                <hr class="my-5 w-custom">
                                 <?php
                             } ?>
                             <!-- <div class="show_more_main" id="show_more_main<?php echo $id; ?>">
@@ -279,22 +279,24 @@
             var likes = document.getElementsByClassName("likes");
             Array.from(likes).forEach((element) => {
                 var num = element.textContent;
-                num = Math.round(num/100)*100;
-                num = num.toString();
-                while (num[num.length-1] == "0") {           
-                    num = num.slice(0, -1);
-                    if (num[num.length-1] != "0") {break;}
-                }
-                num_arr = num.split('');
-                num = "";
-                for(i = 0; i < num_arr.length; i++) {
-                    if (i + 1 == num_arr.length) {
-                        num = num+","+num_arr[i];
-                    } else {
-                        num = num+num_arr[i];
+                if (num > 999) {
+                    num = Math.round(num/100)*100;
+                    num = num.toString();
+                    while (num[num.length-1] == "0") {           
+                        num = num.slice(0, -1);
+                        if (num[num.length-1] != "0") {break;}
                     }
+                    num_arr = num.split('');
+                    num = "";
+                    for(i = 0; i < num_arr.length; i++) {
+                        if (i + 1 == num_arr.length) {
+                            num = num+","+num_arr[i];
+                        } else {
+                            num = num+num_arr[i];
+                        }
+                    }
+                    element.innerHTML = num+"K";
                 }
-                element.innerHTML = num+"K";
             });
         }
         
@@ -302,30 +304,49 @@
     </script>
     <script>
         document.getElementById("button-up").addEventListener("click", scrollUp);
-
+        
         function scrollUp(){
             var currentScroll = document.documentElement.scrollTop;
-
+            
             if (currentScroll > 0){
                 window.scrollTo({top: 0, behavior: 'smooth'});
             }
         }
-
+        
         buttonUp = document.getElementById("button-up");
-
+        
         window.onscroll = function(){
-
+            
             var scroll = document.documentElement.scrollTop;
-
+            
             if (scroll > 500){
                 buttonUp.classList.add("button-scale");
             }else if(scroll < 500){
                 buttonUp.classList.remove("button-scale");
             }
-
+            
         }
-    </script>
+        </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document).on('click','.actions_tikTok',function(){
+                console.log($(this).attr("id"));
+                var ID = $(this).attr('id');
+                setTimeout(() => {
+                    $.ajax({
+                        type:'POST',
+                        url:'likes.php',
+                        data:'id='+ID,
+                        success:function(html){
+                            $('.delete').remove();
+                            $('.posts-list').append(html);
+                        }
+                    });
+                }, 500);
+            });
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function(){
             $(document).on('click','.show_more',function(){

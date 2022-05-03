@@ -39,9 +39,17 @@ CREATE TABLE posts (
 );
 
 INSERT INTO posts VALUES
-(null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',2194),
+(null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',1),
 (null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',23904),
-(null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',2194),
+(null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',999),
 (null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',2194),
 (null,1,'IMG-626fe6dda32746.38508102.jpg','2022-05-02','Samurai',2194);
 
+CREATE TABLE likes (
+    id_like INT PRIMARY KEY AUTO_INCREMENT,
+    id_user INT,
+    FOREIGN KEY (id_user) REFERENCES users(id_user),
+    id_post INT,
+    FOREIGN KEY (id_post) REFERENCES posts(id_post),
+    time VARCHAR(100)
+);

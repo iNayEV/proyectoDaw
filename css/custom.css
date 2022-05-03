@@ -32,6 +32,7 @@ body {
 .div-header-right {
     display: flex;
     margin-top: 1rem;
+    margin-right: 1.25rem;
 }
 
 .logo-img {
@@ -107,7 +108,7 @@ header {
     text-decoration: none;
     font-weight: 750;
     border: 1px solid rgb(229 20 20);
-    background-color: white;
+    background-color: transparent;
 }
 
 .btn-outline-red:hover {
@@ -419,4 +420,12 @@ html {
 
 .button-up i {
     margin: 0 auto;
+}
+
+.actions_tikTok {
+    cursor: pointer;
+}
+
+.bg-red {
+    background-color: red;
 }

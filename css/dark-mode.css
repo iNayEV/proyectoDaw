@@ -15,3 +15,8 @@ body {
     background-color: #202020;
     height: 100%;
 }
+
+.drop-content {
+    background-color: #202020;
+    border-color: #181818;
+}
