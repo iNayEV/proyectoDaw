@@ -22,7 +22,7 @@ if(!empty($_POST["id"])){
     if($rows > 0){ 
         while($reg = mysqli_fetch_array($result)){
             $id = $reg["id_user"];
-            $prof_img = "uploads/".$reg["prof_img"];
+            $prof_img = $reg["prof_img"];
             $username = "@".$reg["username"];
             $firstname = $reg["firstname"];
             $lastname = $reg["lastname"];

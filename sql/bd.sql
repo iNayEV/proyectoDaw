@@ -8,7 +8,7 @@ CREATE TABLE users (
     username VARCHAR(15),
     passwd VARCHAR(16),
     firstname VARCHAR(15),
-    lastname VARCHAR(15),
+    lastname VARCHAR(100),
     num VARCHAR(9),
     prof_descrip VARCHAR(200),
     verify BOOLEAN,
@@ -18,15 +18,15 @@ CREATE TABLE users (
 );
 
 INSERT INTO users VALUES 
-(null,'cespin@insdanielblanxart.cat','cespin10','Cristian98','Cristian','Espinosa','674638964','Hola soy Cristian',1,1,'default-img.jpg','dark'),
-(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg','light'),
-(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg','light'),
-(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg','light'),
-(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg','light'),
-(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg','light'),
-(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg','light'),
-(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg','light'),
-(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'default-img.jpg','light');
+(null,'cespin@insdanielblanxart.cat','cespin10','Cristian98','Cristian','Espinosa','674638964','Hola soy Cristian',1,1,'uploads/default-img.jpg','dark'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light'),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light');
 
 CREATE TABLE posts (
     id_post INT PRIMARY KEY AUTO_INCREMENT,

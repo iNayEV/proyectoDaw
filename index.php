@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nombre empresa</title>
+    <link rel="stylesheet" href="css/lightSwitch.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
     <link rel="stylesheet" href="css/custom.css">
@@ -53,7 +54,7 @@
                                 ?>
                                 <ul class="ul_drop">
                                     <li>
-                                        <img class="prof-pic" src="uploads/<?php echo $reg["prof_img"] ?>" alt="">
+                                        <img class="prof-pic" src="<?php echo $reg["prof_img"] ?>" alt="">
                                         <div class="sub-menu">
                                             <div class="p-relative">
                                                 <ul>
@@ -61,17 +62,31 @@
                                                         <div class="drop-content">
                                                             <div class="d-flex">
                                                                 <div class="f-left">
-                                                                    <img class="prof-pic prof-pic2" src="uploads/<?php echo $reg["prof_img"] ?>" alt="">
+                                                                    <img class="prof-pic prof-pic2" src="<?php echo $reg["prof_img"] ?>" alt="">
                                                                 </div>
                                                                 <div class="f-right">
                                                                     <h3><?php echo $reg["firstname"]." ".$reg["lastname"] ?></h3>
                                                                     <span>@<?php echo $reg["username"]?></span>
                                                                 </div>
                                                             </div>                                                            
-                                                            <div class="t-center">
+                                                            <div class="t-center mb-custom">
                                                                 <hr class="hr-prof">
                                                                 <a href="#" class="c-pointer"><button class="btn2 btn-outline-blue mb-2 w-90">Editar perfil</button></a><br>
                                                                 <button class="btn2 btn-outline-red w-90" id="modal">Cerrar sesión</button>
+                                                                <div class="row d-flex">
+                                                                    <div class="col-sm-6">
+                                                                        <span>Tema</span>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <form action="theme.php" method="GET">
+                                                                            <input type="checkbox" id="toggle" class="toggle--checkbox">
+                                                                            <label for="toggle" class="toggle--label">
+                                                                                <span class="toggle--label-background"></span>
+                                                                            </label>
+                                                                            <div class="background"></div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -139,7 +154,7 @@
                                     if ($rows > 0) {
                                         while ($reg = mysqli_fetch_array($result)) {
                                             $id = $reg["id_user"];
-                                            $prof_img = "uploads/".$reg["prof_img"];
+                                            $prof_img = $reg["prof_img"];
                                             $username = "@".$reg["username"];
                                             $firstname = $reg["firstname"];
                                             $lastname = $reg["lastname"];
@@ -206,7 +221,7 @@
                                 $post_img = "uploads/".$reg["post_img"];
                                 $desc = $reg["post_descrip"];
                                 $likes = $reg["likes"];
-                                $prof_img = "uploads/".$reg["prof_img"];
+                                $prof_img = $reg["prof_img"];
                                 $username = "@".$reg["username"];
                                 ?>
                                 <div class="delete">
@@ -300,7 +315,7 @@
             var likes = document.getElementsByClassName("likes");
             Array.from(likes).forEach((element) => {
                 var num = element.textContent;
-                if (num > 999) {
+                if (num > 9999) {
                     num = Math.round(num/100)*100;
                     num = num.toString();
                     while (num[num.length-1] == "0") {           
@@ -354,20 +369,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+            $(document).on('click','.toggle--label',function(){
+                $.ajax({
+                    method: "POST",
+                    url:'theme.php',
+                    data: {text: ""}
+                });
+                setTimeout(() => {
+                    document.location.reload(true);
+                }, 500);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
             $(document).on('click','.actions_tikTok',function(){
                 console.log($(this).attr("id"));
                 var ID = $(this).attr('id');
-                setTimeout(() => {
-                    $.ajax({
-                        type:'POST',
-                        url:'likes.php',
-                        data:'id='+ID,
-                        success:function(html){
-                            $('.delete').remove();
-                            $('.posts-list').append(html);
-                        }
-                    });
-                }, 500);
+                $.ajax({
+                    type:'POST',
+                    url:'likes.php',
+                    data:'id='+ID,
+                    success:function(html){
+                        $('.delete').remove();
+                        $('.posts-list').append(html);
+                    }
+                });
             });
         });
     </script>

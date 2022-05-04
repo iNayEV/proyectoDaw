@@ -31,7 +31,7 @@
             $post_img = "uploads/".$reg["post_img"];
             $desc = $reg["post_descrip"];
             $likes = $reg["likes"];
-            $prof_img = "uploads/".$reg["prof_img"];
+            $prof_img = $reg["prof_img"];
             $username = "@".$reg["username"];
             ?>
             <div class="delete">
@@ -104,7 +104,7 @@
             var likes = document.getElementsByClassName("likes");
             Array.from(likes).forEach((element) => {
                 var num = element.textContent;
-                if (num > 999) {
+                if (num > 9999) {
                     num = Math.round(num/100)*100;
                     num = num.toString();
                     while (num[num.length-1] == "0") {           
