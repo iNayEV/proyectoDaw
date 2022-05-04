@@ -34,6 +34,11 @@
                 </div>
             </form>
             <p class="text--center">¿No tienes cuenta todavía? <a href="register.php">¡Regístrate!</a></p>
+            <hr>
+            <div>
+                <?php require ("auth.php") ?>
+                <a href="<?php echo $client->createAuthUrl() ?>">Iniciar sesión con Google</a>
+            </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" class="icons">
             <symbol id="lock" viewBox="0 0 1792 1792">
