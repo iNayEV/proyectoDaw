@@ -52,7 +52,7 @@
                                 $reg = mysqli_fetch_array($result);
                                 $id_user = $reg["id_user"];
                                 ?>
-                                <ul class="ul_drop">
+                                <ul id="ul-dropdown" class="ul_drop">
                                     <li>
                                         <img class="prof-pic" src="<?php echo $reg["prof_img"] ?>" alt="">
                                         <div class="sub-menu">
@@ -376,6 +376,8 @@
                     data: {text: ""}
                 });
                 setTimeout(() => {
+                    var drop = document.getElementById("ul-dropdown");
+                    drop.classList.add("d-block");
                     document.location.reload(true);
                 }, 500);
             });

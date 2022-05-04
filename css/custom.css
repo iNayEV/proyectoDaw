@@ -441,3 +441,7 @@ html {
     font-size: 22px;
     border-radius: 100%;
 }
+
+.d-block {
+    display: block;
+}
