@@ -79,7 +79,7 @@
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <form action="theme.php" method="GET">
-                                                                            <input type="checkbox" id="toggle" class="toggle--checkbox">
+                                                                            <input type="checkbox" id="toggle" class="toggle--checkbox" <?php if($reg["mode"]=="dark") { echo "checked"; } ?>>
                                                                             <label for="toggle" class="toggle--label">
                                                                                 <span class="toggle--label-background"></span>
                                                                             </label>
@@ -252,26 +252,35 @@
                                             <div class="ms-3">
                                                 <div class="d-flex flex-column align-items-center" id="likes<?php echo $id ?>">
                                                     <?php 
-                                                        $sql = "SELECT * FROM likes WHERE id_user=".$id_user." AND id_post=".$id;
-                                                        $result = mysqli_query($con, $sql);
-                                                        $rows = mysqli_num_rows($result);
-                                                        if($rows > 0) {
-                                                            ?>
-                                                                <div class="like-red" id="<?php echo $id ?>">
-                                                                    <i class="fas fa-heart"></i>
-                                                                </div>
-                                                                <span class="likes"><?php echo $likes ?></span>
-                                                            <?php
+                                                        if (isset($_SESSION["user"])) {
+                                                            $sql = "SELECT * FROM likes WHERE id_user=".$id_user." AND id_post=".$id;
+                                                            $result = mysqli_query($con, $sql);
+                                                            $rows = mysqli_num_rows($result);
+                                                            if($rows > 0) {
+                                                                ?>
+                                                                    <div class="like-red" id="<?php echo $id ?>">
+                                                                        <i class="fas fa-heart"></i>
+                                                                    </div>
+                                                                    <span class="likes"><?php echo $likes ?></span>
+                                                                <?php
+                                                            } else {
+                                                                ?>
+                                                                    <div class="actions_tikTok" id="<?php echo $id ?>">
+                                                                        <i class="fas fa-heart"></i>
+                                                                    </div>
+                                                                    <span class="likes"><?php echo $likes ?></span>
+                                                                <?php
+                                                            }
+                                                            $sql = "SELECT * FROM posts INNER JOIN users ON posts.id_user=users.id_user WHERE id_post >".$id;
+                                                            $result = mysqli_query($con, $sql);
                                                         } else {
                                                             ?>
-                                                                <div class="actions_tikTok" id="<?php echo $id ?>">
+                                                                <div class="likes-noAcc" id="<?php echo $id ?>">
                                                                     <i class="fas fa-heart"></i>
                                                                 </div>
                                                                 <span class="likes"><?php echo $likes ?></span>
                                                             <?php
                                                         }
-                                                        $sql = "SELECT * FROM posts INNER JOIN users ON posts.id_user=users.id_user WHERE id_post >".$id;
-                                                        $result = mysqli_query($con, $sql);
                                                     ?>
                                                 </div>
                                             </div>
@@ -376,8 +385,6 @@
                     data: {text: ""}
                 });
                 setTimeout(() => {
-                    var drop = document.getElementById("ul-dropdown");
-                    drop.classList.add("d-block");
                     document.location.reload(true);
                 }, 500);
             });

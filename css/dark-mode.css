@@ -20,3 +20,19 @@ body {
     background-color: #202020;
     border-color: #181818;
 }
+
+.modal-content {
+    background-color: #202020;
+    border: 1px solid #323232;
+}
+
+.btn-cancel {
+    background-color: #3e3e3e;
+    color: white;
+    transition: 150ms;
+}
+
+.btn-cancel:hover {
+    background-color: #282828;
+    color: white;
+}
