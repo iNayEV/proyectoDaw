@@ -268,6 +268,17 @@ ul.ul_drop li:hover .sub-menu {
     position: relative;
 }
 
+.modal-content-login {
+    padding-left: 20px;
+    width: fit-content;
+    text-align: center;
+}
+
+.text-content {
+    padding: 20px;
+    margin: 0 auto;
+}
+
 .close {
     color: #aaaaaa;
     float: right;
@@ -285,6 +296,13 @@ ul.ul_drop li:hover .sub-menu {
 .r-pos {
     position: absolute;
     right: 1.5rem;
+    justify-self: flex-end;
+}
+
+.r-pos-login {
+    position: absolute;
+    right: 1.5rem;
+    top: 1rem;
     justify-self: flex-end;
 }
 
@@ -316,6 +334,10 @@ ul.ul_drop li:hover .sub-menu {
 
 .marginb-4 {
     margin-bottom: 4rem;
+}
+
+.marginb-2 {
+    margin-bottom: 2rem;
 }
 
 .p-fixed{
@@ -473,4 +495,33 @@ html {
 
 .likes-noAcc:hover {
     background-color: rgb(184, 42, 42);
+}
+
+.d-flex-login {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 10px;
+    transition: 250ms;
+}
+
+.text-dec-none:hover, .text-dec-none:focus {
+    color: rgb(37, 37, 37);
+    text-decoration: none;
+}
+
+.google-div {
+    padding: 5px 0;
+    margin-top: 1rem;
+    border: 1px solid #b7b7b7;
+    border-radius: 0.25rem;
+}
+
+.google-div:hover {
+    background-color: #c3c3c32e;
+}
+
+.d-flex-login img {
+    margin-right: 1rem;
 }

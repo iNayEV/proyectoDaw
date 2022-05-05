@@ -242,9 +242,36 @@
                                                 <small><?php echo $desc ?></small>
                                             </div>
                                         </div>
-                                        <a href="#" class="btn2 btn-outline-blue mr-custom">
-                                            Seguir
-                                        </a>
+                                        <div class="ajax-follow">
+                                            <div class="button-follow">
+                                                <?php 
+                                                    if (isset($_SESSION["user"])) {
+                                                        // $sql = "SELECT * FROM posts INNER JOIN users ON posts.id_user=users.id_user";
+                                                        $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
+                                                        $result = mysqli_query($con, $sql);
+                                                        $user = mysqli_fetch_array($result);
+                                                        $sql = "SELECT * FROM follows WHERE id_poster='".$reg["id_user"]."' AND id_user='".$user["id_user"]."'";
+                                                        $result = mysqli_query($con, $sql);
+                                                        
+                                                        $rows = mysqli_num_rows($result);
+                                                        
+                                                        if($rows < 1) {
+                                                            ?>
+                                                                <button class="btn2 btn-outline-blue mr-custom <?php if (!isset($_SESSION["user"])) { echo "follow-noAcc"; }else{ echo "follow"; } ?>" id="<?php echo $reg["id_user"] ?>">
+                                                                    Seguir
+                                                                </button>
+                                                            <?php
+                                                        } else {
+                                                            ?>
+                                                                <button class="btn2 btn-outline-red mr-custom unfollow">
+                                                                    Dejar de seguir
+                                                                </button>
+                                                            <?php
+                                                        }
+                                                    }
+                                                ?>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="wrap-center">
                                         <div class="mt-3 d-flex align-items-end item-center">
@@ -316,9 +343,33 @@
             </div>
         </div>
     </div>
+
+    <div id="div-modal-login" class="div-modal">
+        <div class="modal-content modal-content-login">
+            <div class="text-content">
+                <button onclick="closeModalLogIn()" class="btn-none r-pos-login"><span name="span-close" class="close">&times;</span></button>
+                <h3 class="margint-2">No has iniciado <span>sesió</span>n.</h3>
+                <p class="marginb-2">Escoja una opcion.</p>
+                
+                <a href="login.php" class="text-dec-none">
+                    <div class="google-div">
+                        <span class="d-flex-login">Continuar con Liberty</span>
+                    </div>
+                </a>
+                <?php require ("auth.php") ?>
+                <a href="<?php echo $client->createAuthUrl() ?>" class="text-dec-none">
+                    <div class="google-div">
+                        <span class="d-flex-login"><img src="uploads/google.png" width="25px" alt="">Continuar con Google</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <div id="button-up" class="button-up">
         <i class="fas fa-chevron-up"></i>
     </div>
+
     <script>
         function convertNum() {
             var likes = document.getElementsByClassName("likes");
@@ -350,6 +401,7 @@
         
         convertNum();
     </script>
+    
     <script>
         document.getElementById("button-up").addEventListener("click", scrollUp);
         
@@ -374,8 +426,10 @@
             }
             
         }
-        </script>
+    </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function(){
             $(document).on('click','.toggle--label',function(){
@@ -390,14 +444,33 @@
             });
         });
     </script>
+
     <script type="text/javascript">
         $(document).ready(function(){
-            $(document).on('click','.actions_tikTok',function(){
+            $(document).on('click','.follow',function(){
                 console.log($(this).attr("id"));
                 var ID = $(this).attr('id');
                 $.ajax({
                     type:'POST',
-                    url:'likes.php',
+                    url:'follow.php',
+                    data:'id='+ID,
+                    success:function(html){
+                        $('.button-follow').remove();
+                        $('.ajax-follow').append(html);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document).on('click','.like-red',function(){
+                console.log($(this).attr("id"));
+                var ID = $(this).attr('id');
+                $.ajax({
+                    type:'POST',
+                    url:'dislikes.php',
                     data:'id='+ID,
                     success:function(html){
                         $('.delete').remove();
@@ -407,6 +480,7 @@
             });
         });
     </script>
+
     <script type="text/javascript">
         $(document).ready(function(){
             $(document).on('click','.show_more',function(){
@@ -428,6 +502,29 @@
             });
         });
     </script>
+
+    <script>
+        var modalLogin = document.getElementById("div-modal-login");
+
+        function closeModalLogIn() {
+            modalLogin.style.display = "none";
+        }
+
+        $(document).on('click','.likes-noAcc',function(){
+            modalLogin.style.display = "block";
+        });
+
+        $(document).on('click','.follow-noAcc',function(){
+            modalLogin.style.display = "block";
+        });
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modalLogin.style.display = "none";
+            }
+        }
+    </script>
+
     <script>
         var modal = document.getElementById("div-modal");
 

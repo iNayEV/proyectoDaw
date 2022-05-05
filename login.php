@@ -11,7 +11,7 @@
     <header>
         <div class="header">
             <div class="header-wrap-login">
-                <a href="index.html"><img class="logo-img" src="img/logo-example.png" alt=""></a>
+                <a href="index.php"><img class="logo-img" src="img/logo-example.png" alt=""></a>
             </div>
         </div>
     </header>
@@ -37,7 +37,11 @@
             <hr>
             <div>
                 <?php require ("auth.php") ?>
-                <a href="<?php echo $client->createAuthUrl() ?>">Iniciar sesión con Google</a>
+                <a href="<?php echo $client->createAuthUrl() ?>" class="text-dec-none">
+                    <div class="google-div">
+                        <span class="d-flex"><img src="uploads/google.png" width="25px" alt="">Continuar con Google</span>
+                    </div>
+                </a>
             </div>
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" class="icons">

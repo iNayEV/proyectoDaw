@@ -6,7 +6,7 @@ CREATE TABLE users (
     id_user INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100),
     username VARCHAR(15),
-    passwd VARCHAR(16),
+    passwd VARCHAR(100),
     firstname VARCHAR(15),
     lastname VARCHAR(100),
     num VARCHAR(9),
@@ -53,3 +53,13 @@ CREATE TABLE likes (
     FOREIGN KEY (id_post) REFERENCES posts(id_post),
     time VARCHAR(100)
 );
+
+CREATE TABLE follows (
+    id_follow INT PRIMARY KEY AUTO_INCREMENT,
+    id_user INT,
+    FOREIGN KEY (id_user) REFERENCES users(id_user),
+    id_poster INT,
+    FOREIGN KEY (id_poster) REFERENCES users(id_user)
+);
+
+INSERT INTO follows VALUE (null,1,2);

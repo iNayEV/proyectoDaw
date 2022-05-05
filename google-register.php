@@ -5,6 +5,7 @@
     $email = $_REQUEST["email"];
     $username = $_REQUEST["username"];
     $passwd = $_REQUEST["passwd"];
+    $hash = password_hash($passwd,PASSWORD_DEFAULT);
     $num = "";
     $descrip = "";
 
@@ -13,7 +14,7 @@
     $result = mysqli_query($con, $sql);
     $rows = mysqli_num_rows($result);
     if ($rows < 1) {
-        $sql = "INSERT INTO users VALUES(null,'$email','$username','$passwd','$firstname','$lastname','$num','$descrip',0,0,'$prof_pic','light')";
+        $sql = "INSERT INTO users VALUES(null,'$email','$username','$hash','$firstname','$lastname','$num','$descrip',0,0,'$prof_pic','light')";
         echo $sql;
         $result = mysqli_query($con, $sql);
 

@@ -7,6 +7,7 @@ $lastname = $_POST["lastname"];
 $username = $_POST["username"];
 $email = $_POST["email"];
 $passwd = $_POST["passwd"];
+$hash = password_hash($passwd,PASSWORD_DEFAULT);
 $num = $_POST["phone-number"];
 
 if (isset($_POST['submit']) && isset($_FILES['post-img'])) {
@@ -57,7 +58,7 @@ if (isset($_POST['submit']) && isset($_FILES['post-img'])) {
 					if($rows) {
 						header("Location: register.php?error=email");
 					} else {
-						$sql = "INSERT INTO users VALUES(null,'$email','$username','$passwd','$firstname','$lastname','$num','$descrip',0,0,'$img_upload_path')";
+						$sql = "INSERT INTO users VALUES(null,'$email','$username','$hash','$firstname','$lastname','$num','$descrip',0,0,'$img_upload_path')";
 						
 						$result = mysqli_query($con, $sql);
 						
@@ -77,7 +78,7 @@ if (isset($_POST['submit']) && isset($_FILES['post-img'])) {
 	}else {
 		// $em = "unknown error occurred!";
 		// header("Location: index.php?error=$em");
-		$sql = "INSERT INTO users VALUES(null,'$email','$username','$passwd','$firstname','$lastname','$num','$descrip',0,0,'uploads/default-img.jpg')";
+		$sql = "INSERT INTO users VALUES(null,'$email','$username','$hash','$firstname','$lastname','$num','$descrip',0,0,'uploads/default-img.jpg','light')";
 						
 		$result = mysqli_query($con, $sql);
 
