@@ -3,7 +3,15 @@
 include("sql/connect.php");
 
 $firstname = $_POST["firstname"];
-$lastname = $_POST["lastname"];
+$lastname_arr = str_split($_POST["lastname"]);
+for ($i = 0; $i < count($lastname_arr); $i++) {
+	if ($lastname_arr[$i] != " ") {
+		$lastname[$i] = $lastname_arr[$i];
+	} else {
+		break;
+	}
+}
+$lastname = implode($lastname);
 $username = $_POST["username"];
 $email = $_POST["email"];
 $passwd = $_POST["passwd"];

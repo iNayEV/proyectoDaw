@@ -37,52 +37,97 @@
             <div class="delete">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex" style="align-items: center;">
-                        <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
+                        <a href="#">
+                            <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
+                        </a>
                         <div>
-                            <h6 class="mb-0 fw-bold">
-                                <?php echo $username ?>
-                                <!-- <?php 
-                                    if ($reg["administrator"] == 1) {
-                                        ?>
-                                            <i class="fas fa-check-circle text-blue"></i>
-                                        <?php
-                                    }
-                                ?> -->
-                            </h6>
+                            <a href="#" class="user-prof">
+                                <h6 class="mb-0 fw-bold">
+                                    <?php echo $username ?>
+                                    <!-- <?php 
+                                        if ($reg["administrator"] == 1) {
+                                            ?>
+                                                <i class="fas fa-check-circle text-blue"></i>
+                                            <?php
+                                        }
+                                    ?> -->
+                                </h6>
+                            </a>
                             <small><?php echo $desc ?></small>
                         </div>
                     </div>
-                    <a href="#" class="btn2 btn-outline-blue mr-custom">
-                        Seguir
-                    </a>
+                    <div class="ajax-follow">
+                        <div class="button-follow">
+                            <?php 
+                                if (isset($_SESSION["user"])) {
+                                    // $sql = "SELECT * FROM posts INNER JOIN users ON posts.id_user=users.id_user";
+                                    $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
+                                    $result = mysqli_query($con, $sql);
+                                    $user = mysqli_fetch_array($result);
+                                    $sql = "SELECT * FROM follows WHERE id_poster='".$reg["id_user"]."' AND id_user='".$user["id_user"]."'";
+                                    $result = mysqli_query($con, $sql);
+                                    
+                                    $rows = mysqli_num_rows($result);
+                                    
+                                    if($rows < 1) {
+                                        ?>
+                                            <button class="btn2 btn-outline-blue mr-custom follow" id="<?php echo $reg["id_user"] ?>">
+                                                Seguir
+                                            </button>
+                                        <?php
+                                    } else {
+                                        ?>
+                                            <button class="btn2 btn-outline-red mr-custom unfollow" id="<?php echo $reg["id_user"] ?>">
+                                                Dejar de seguir
+                                            </button>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                        <button class="btn2 btn-outline-blue mr-custom follow-noAcc">
+                                            Seguir
+                                        </button>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
                 </div>
                 <div class="wrap-center">
                     <div class="mt-3 d-flex align-items-end item-center">
                         <img src="<?php echo $post_img ?>" class="tikTok_screen_img">
                         <div class="ms-3">
-                            <div class="d-flex flex-column align-items-center
-                            " id="likes<?php echo $id ?>">
+                            <div class="d-flex flex-column align-items-center" id="likes<?php echo $id ?>">
                                 <?php 
-                                    $sql = "SELECT * FROM likes WHERE id_user=".$id_user." AND id_post=".$id;
-                                    $result = mysqli_query($con, $sql);
-                                    $rows = mysqli_num_rows($result);
-                                    if($rows > 0) {
-                                        ?>
-                                            <div class="like-red" id="<?php echo $id ?>">
-                                                <i class="fas fa-heart"></i>
-                                            </div>
-                                            <span class="likes"><?php echo $likes ?></span>
-                                        <?php
+                                    if (isset($_SESSION["user"])) {
+                                        $sql = "SELECT * FROM likes WHERE id_user=".$id_user." AND id_post=".$id;
+                                        $result = mysqli_query($con, $sql);
+                                        $rows = mysqli_num_rows($result);
+                                        if($rows > 0) {
+                                            ?>
+                                                <div class="like-red" id="<?php echo $id ?>">
+                                                    <i class="fas fa-heart"></i>
+                                                </div>
+                                                <span class="likes"><?php echo $likes ?></span>
+                                            <?php
+                                        } else {
+                                            ?>
+                                                <div class="actions_tikTok" id="<?php echo $id ?>">
+                                                    <i class="fas fa-heart"></i>
+                                                </div>
+                                                <span class="likes"><?php echo $likes ?></span>
+                                            <?php
+                                        }
+                                        $sql = "SELECT * FROM posts INNER JOIN users ON posts.id_user=users.id_user WHERE id_post >".$id;
+                                        $result = mysqli_query($con, $sql);
                                     } else {
                                         ?>
-                                            <div class="actions_tikTok" id="<?php echo $id ?>">
+                                            <div class="likes-noAcc" id="<?php echo $id ?>">
                                                 <i class="fas fa-heart"></i>
                                             </div>
                                             <span class="likes"><?php echo $likes ?></span>
                                         <?php
                                     }
-                                    $sql = "SELECT * FROM posts INNER JOIN users ON posts.id_user=users.id_user WHERE id_post >".$id;
-                                    $result = mysqli_query($con, $sql);
                                 ?>
                             </div>
                         </div>

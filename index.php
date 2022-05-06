@@ -1,214 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-    session_start();
-    include("sql/connect.php");
-?>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nombre empresa</title>
-    <link rel="stylesheet" href="css/lightSwitch.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-    <link rel="stylesheet" href="css/custom.css">
-    <?php 
-        if (isset($_SESSION["user"])) {
-            $sql = "SELECT * FROM users WHERE username = '".$_SESSION["user"]."'";
-            $result = mysqli_query($con, $sql);
-            $reg = mysqli_fetch_array($result);
-            if ($reg["mode"]=="dark") {
-                ?>
-                <link rel="stylesheet" href="css/dark-mode.css">
-                <link rel="stylesheet" href="css/scroll-dark.css">
-                <?php
-            }
-        } else {
-            ?>
-            <link rel="stylesheet" href="css/scroll-light.css">
-            <?php
-        }
+    <?php
+        session_start();
+        include("sql/connect.php");
+        include("head.php");
     ?>
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <div class="header">
-            <div class="header-wrap">
-                <a href="/"><img class="logo-img" src="img/logo-example.png" alt=""></a>
-                <?php
-                    if(!isset($_SESSION["user"])) {
-                        ?>
-                            <a href="login.php" class="c-pointer" style="margin-right: 1.25rem;"><button class="btn2 btn-login">Iniciar sesión</button></a>
-                            <?php
-                    }else{
-                        ?>
-                            <div class="div-header-right">
-                                <a href="new-post.php" class="c-pointer"><button class="btn2 btn-login">Publicar</button></a>
-                                <?php 
-                                $sql = "SELECT * FROM users WHERE username = '".$_SESSION["user"]."'";
-                                $result = mysqli_query($con, $sql);
-                                $reg = mysqli_fetch_array($result);
-                                $id_user = $reg["id_user"];
-                                ?>
-                                <ul id="ul-dropdown" class="ul_drop">
-                                    <li>
-                                        <img class="prof-pic" src="<?php echo $reg["prof_img"] ?>" alt="">
-                                        <div class="sub-menu">
-                                            <div class="p-relative">
-                                                <ul>
-                                                    <li>
-                                                        <div class="drop-content">
-                                                            <div class="d-flex">
-                                                                <div class="f-left">
-                                                                    <img class="prof-pic prof-pic2" src="<?php echo $reg["prof_img"] ?>" alt="">
-                                                                </div>
-                                                                <div class="f-right">
-                                                                    <h3><?php echo $reg["firstname"]." ".$reg["lastname"] ?></h3>
-                                                                    <span>@<?php echo $reg["username"]?></span>
-                                                                </div>
-                                                            </div>                                                            
-                                                            <div class="t-center mb-custom">
-                                                                <hr class="hr-prof">
-                                                                <a href="#" class="c-pointer"><button class="btn2 btn-outline-blue mb-2 w-90">Editar perfil</button></a><br>
-                                                                <button class="btn2 btn-outline-red w-90" id="modal">Cerrar sesión</button>
-                                                                <div class="row d-flex">
-                                                                    <div class="col-sm-6">
-                                                                        <span>Tema</span>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <form action="theme.php" method="GET">
-                                                                            <input type="checkbox" id="toggle" class="toggle--checkbox" <?php if($reg["mode"]=="dark") { echo "checked"; } ?>>
-                                                                            <label for="toggle" class="toggle--label">
-                                                                                <span class="toggle--label-background"></span>
-                                                                            </label>
-                                                                            <div class="background"></div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <?php
-                                    if($reg["administrator"]==1) {
-                                        ?>
-                                        <a href="admin/crud/user.php" class="c-pointer ml-2rem"><button class="btn2 btn-admin">Administración</button></a>
-                                        <?php
-                                    }
-                                ?>
-                            </div>
-                        <?php
-                    }
-                ?>
-            </div>
-        </div>
-    </header>
+    <?php
+        include("header.php");
+    ?>
 
     <div class="container mt-custom">
         <div class="row">
-            <div class="col-sm-4 p-custom">
-                <div class="p-fixed ofy-auto side-nav">
-                    <!-- <div>
-                        <a class="d-flex align-items-center text-pink h5">
-                            <i class="fas fa-home"></i>
-                            <span class="ms-2">FyP</span>
-                        </a>
-                        <a class="d-flex align-items-center h5">
-                            <i class="fas fa-user-friends"></i>
-                            <span class="ms-2">Seguimiento</span>
-                        </a>
-                    </div> -->
-                    <!-- <hr class="my-5"> -->
-                    <?php 
-                        if (!isset($_SESSION["user"])) {
-                            ?>
-                            <div>
-                                <p>Inicia sesión para seguir creadores, dar like a videos, y ver comentarios.</p>
-                                <a href="login.php">
-                                    <div style="text-align: center" class="btn2 btn-mw-none btn-outline-blue w-100 p-2">
-                                        <b>Iniciar sesión</b>
-                                    </div>
-                                </a>
-                            </div>
-                            <hr class="my-4">
-                            <?php
-                        }
-                        ?>
-                    <div>
-                        <div class="d-flex align-items-center justify-content-between">
-                            <span>Cuentas relacionadas</span>
-                            <!-- <a href="#" class="text-pink">Ver más</a> -->
-                        </div>
-                        <div class="mt-2">
-                            <ul class="usersList">
-                                <?php
-                                    $sql = "SELECT * FROM users LIMIT 4";
-                                    $result = mysqli_query($con, $sql);
-                                    $rows = mysqli_num_rows($result);
-                                    if ($rows > 0) {
-                                        while ($reg = mysqli_fetch_array($result)) {
-                                            $id = $reg["id_user"];
-                                            $prof_img = $reg["prof_img"];
-                                            $username = "@".$reg["username"];
-                                            $firstname = $reg["firstname"];
-                                            $lastname = $reg["lastname"];
-                                            ?>
-                                            <li class="mb-4">
-                                                <div class="d-flex" style="align-items: center;">
-                                                    <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
-                                                    <div>
-                                                        <h6 class="mb-0 fw-bold">
-                                                            <?php echo $firstname ?> <?php echo $lastname ?>
-                                                            <?php 
-                                                                if ($reg["administrator"] == 1) {
-                                                                    ?>
-                                                                        <i class="fas fa-check-circle text-blue"></i>
-                                                                    <?php
-                                                                }
-                                                            ?>
-                                                        </h6>
-                                                        <small><?php echo $username ?></small>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <?php
-                                        } ?>
-                                        <div class="show_more_main" id="show_more_main<?php echo $id; ?>">
-                                            <span id="<?php echo $id; ?>" class="show_more" title="Load more posts">Show more</span>
-                                            <span class="loding" style="display: none;"><span class="loding_txt">Loading...</span></span>
-                                        </div>
-                                        <?php
-                                    }
-                                ?>
-                            </ul>
-                        </div>
-                    </div>
-                    <hr>
-                    <div>
-                        <div class="d-flex align-items-center justify-content-between">
-                            <span>Descubre</span>
-                        </div>
-                        <div>
-                            <a href="#" class="badge rounded-pill border border-secondary text-dark m-2"># Discover</a>
-                            <span class="badge rounded-pill border border-secondary text-dark m-2"># Dance</span>
-                            <span class="badge rounded-pill border border-secondary text-dark m-2"># Challenge</span>
-                            <!-- <span class="badge rounded-pill border border-secondary text-dark m-2"><i class="fas fa-music"></i> 
-                            Duro 2 horas - Faraón Love Shady ( Vídeo Oficial )</span>
-                            <span class="badge rounded-pill border border-secondary text-dark m-2"><i class="fas fa-music"></i> Quevedo - AHORA 2 | Freestyle</span> -->
-                        </div>
-                    </div>
-                    <hr>
-                    <div>
-                        &copy; Liberty
-                    </div>
-                </div>
-            </div>
+            <?php
+                include("feed-left.php");
+            ?>
             <div class="col-sm-8 theme-dark p-custom">
                 <div class="mb-5 posts-list">
                     <?php
@@ -222,23 +30,27 @@
                                 $desc = $reg["post_descrip"];
                                 $likes = $reg["likes"];
                                 $prof_img = $reg["prof_img"];
-                                $username = "@".$reg["username"];
+                                $username = $reg["username"];
                                 ?>
                                 <div class="delete">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex" style="align-items: center;">
-                                            <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
+                                            <a href="user.php?username=<?php echo $username ?>">
+                                                <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
+                                            </a>
                                             <div>
-                                                <h6 class="mb-0 fw-bold">
-                                                    <?php echo $username ?>
-                                                    <!-- <?php 
-                                                        if ($reg["administrator"] == 1) {
-                                                            ?>
-                                                                <i class="fas fa-check-circle text-blue"></i>
-                                                            <?php
-                                                        }
-                                                    ?> -->
-                                                </h6>
+                                                <a href="user.php?username=<?php echo $username ?>" class="user-prof">
+                                                    <h6 class="mb-0 fw-bold">
+                                                        <?php echo "@".$username ?>
+                                                        <!-- <?php 
+                                                            if ($reg["administrator"] == 1) {
+                                                                ?>
+                                                                    <i class="fas fa-check-circle text-blue"></i>
+                                                                <?php
+                                                            }
+                                                        ?> -->
+                                                    </h6>
+                                                </a>
                                                 <small><?php echo $desc ?></small>
                                             </div>
                                         </div>
@@ -497,6 +309,24 @@
                 $.ajax({
                     type:'POST',
                     url:'dislikes.php',
+                    data:'id='+ID,
+                    success:function(html){
+                        $('.delete').remove();
+                        $('.posts-list').append(html);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document).on('click','.actions_tikTok',function(){
+                console.log($(this).attr("id"));
+                var ID = $(this).attr('id');
+                $.ajax({
+                    type:'POST',
+                    url:'likes.php',
                     data:'id='+ID,
                     success:function(html){
                         $('.delete').remove();

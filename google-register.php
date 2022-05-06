@@ -1,7 +1,15 @@
 <?php
     $prof_pic = $_REQUEST["prof-pic"];
     $firstname = $_REQUEST["firstname"];
-    $lastname = $_REQUEST["lastname"];
+    $lastname_arr = str_split($_REQUEST["lastname"]);
+    for ($i = 0; $i < count($lastname_arr); $i++) {
+        if ($lastname_arr[$i] != " ") {
+            $lastname[$i] = $lastname_arr[$i];
+        } else {
+            break;
+        }
+    }
+    $lastname = implode($lastname);
     $email = $_REQUEST["email"];
     $username = $_REQUEST["username"];
     $passwd = $_REQUEST["passwd"];

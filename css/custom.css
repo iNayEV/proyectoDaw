@@ -525,3 +525,16 @@ html {
 .d-flex-login img {
     margin-right: 1rem;
 }
+
+.user-prof {
+    color: rgb(0, 0, 0);
+}
+
+.user-prof:hover {
+    color: rgb(32, 32, 32);
+    text-decoration: underline;
+}
+
+.full-height {
+    min-height: 93vh;
+}
