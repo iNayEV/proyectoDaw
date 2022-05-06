@@ -18,6 +18,14 @@
     <div class="align" style="width: 100%; height: 100%;">
         <div class="grid">
             <form action="validar.php" method="POST" class="form login">
+                <?php 
+                    if (isset($_REQUEST["username"])) {
+                        ?>
+                            <input type="hidden" name="user" value="<?php echo $_REQUEST["username"] ?>">
+                        <?php
+                    }
+                ?>
+                <input type="hidden" name="page" value="<?php echo $_REQUEST["page"] ?>">
                 <div class="form__field">
                     <label for="login__username"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg></label>
                     <input id="login__username" type="text" name="username" class="form__input" placeholder="Nombre de usuario" required>

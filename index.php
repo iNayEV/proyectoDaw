@@ -4,18 +4,27 @@
     <?php
         session_start();
         include("sql/connect.php");
-        include("head.php");
+        include("include/head.php");
     ?>
 </head>
 <body>
     <?php
-        include("header.php");
-    ?>
+        include("include/header.php");
+        if(!isset($_SESSION["user"])) {
+            ?>
+                <a href="login.php?page=index" class="c-pointer" style="margin-right: 1.25rem;"><button class="btn2 btn-login">Iniciar sesión</button></a>
+                <?php
+        }else{
+            include("include/header2.php");
+        } ?>
+        </div>
+        </div>
+        </header>
 
     <div class="container mt-custom">
         <div class="row">
             <?php
-                include("feed-left.php");
+                include("include/feed-left.php");
             ?>
             <div class="col-sm-8 theme-dark p-custom">
                 <div class="mb-5 posts-list">
@@ -147,46 +156,15 @@
         </div>
     </div>
 
-    <div id="div-modal" class="div-modal">
-        <div class="modal-content">
-            <button onclick="closeModal()" class="btn-none r-pos"><span name="span-close" class="close">&times;</span></button>
-            <h3 class="margint-2">¿Quieres cerrar sesión?</h3>
-            <p class="marginb-4">Cerrara la sesión. No se eliminara el usuario.</p>
-            
-            <div class="d-flex r-pos r-pos2">
-                <button class="btn2 btn-cancel" onclick="closeModal()">Cancelar</button>
-                <form action="logout.php" method="POST">
-                    <button type="submit" name="logout" class="btn2 btn-admin">Cerrar sesión</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    <?php include("include/modal-logout1.php") ?>
+    <form action="logout.php?page=index&username=<?php echo $_REQUEST["username"] ?>" method="POST">
+    <?php include("include/modal-logout2.php") ?>
 
-    <div id="div-modal-login" class="div-modal">
-        <div class="modal-content modal-content-login">
-            <div class="text-content">
-                <button onclick="closeModalLogIn()" class="btn-none r-pos-login"><span name="span-close" class="close">&times;</span></button>
-                <h3 class="margint-2">No has iniciado <span>sesió</span>n.</h3>
-                <p class="marginb-2">Escoja una opcion.</p>
-                
-                <a href="login.php" class="text-dec-none">
-                    <div class="google-div">
-                        <span class="d-flex-login">Continuar con Liberty</span>
-                    </div>
-                </a>
-                <?php require ("auth.php") ?>
-                <a href="<?php echo $client->createAuthUrl() ?>" class="text-dec-none">
-                    <div class="google-div">
-                        <span class="d-flex-login"><img src="uploads/google.png" width="25px" alt="">Continuar con Google</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+    <?php include("include/modal-login1.php") ?>
+    <a href="login.php?page=index" class="text-dec-none">
+    <?php include("include/modal-login2.php") ?>
 
-    <div id="button-up" class="button-up">
-        <i class="fas fa-chevron-up"></i>
-    </div>
+    <?php include("include/button.php") ?>
 
     <script>
         function convertNum() {
@@ -220,149 +198,18 @@
         convertNum();
     </script>
     
-    <script>
-        document.getElementById("button-up").addEventListener("click", scrollUp);
-        
-        function scrollUp(){
-            var currentScroll = document.documentElement.scrollTop;
-            
-            if (currentScroll > 0){
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            }
-        }
-        
-        buttonUp = document.getElementById("button-up");
-        
-        window.onscroll = function(){
-            
-            var scroll = document.documentElement.scrollTop;
-            
-            if (scroll > 500){
-                buttonUp.classList.add("button-scale");
-            }else if(scroll < 500){
-                buttonUp.classList.remove("button-scale");
-            }
-            
-        }
-    </script>
+    <script src="js/button.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $(document).on('click','.toggle--label',function(){
-                $.ajax({
-                    method: "POST",
-                    url:'theme.php',
-                    data: {text: ""}
-                });
-                setTimeout(() => {
-                    document.location.reload(true);
-                }, 500);
-            });
-        });
-    </script>
+    <script src="js/theme.js"></script>
 
     <script src="js/follow.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $(document).on('click','.like-red',function(){
-                console.log($(this).attr("id"));
-                var ID = $(this).attr('id');
-                $.ajax({
-                    type:'POST',
-                    url:'dislikes.php',
-                    data:'id='+ID,
-                    success:function(html){
-                        $('.delete').remove();
-                        $('.posts-list').append(html);
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="js/like.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $(document).on('click','.actions_tikTok',function(){
-                console.log($(this).attr("id"));
-                var ID = $(this).attr('id');
-                $.ajax({
-                    type:'POST',
-                    url:'likes.php',
-                    data:'id='+ID,
-                    success:function(html){
-                        $('.delete').remove();
-                        $('.posts-list').append(html);
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="js/show_more.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $(document).on('click','.show_more',function(){
-                console.log($(this).attr("id"));
-                var ID = $(this).attr('id');
-                $('.show_more').hide();
-                $('.loding').show();
-                setTimeout(() => {
-                    $.ajax({
-                        type:'POST',
-                        url:'ajax_more.php',
-                        data:'id='+ID,
-                        success:function(html){
-                            $('#show_more_main'+ID).remove();
-                            $('.usersList').append(html);
-                        }
-                    });
-                }, 500);
-            });
-        });
-    </script>
-
-    <script>
-        var modalLogin = document.getElementById("div-modal-login");
-
-        function closeModalLogIn() {
-            modalLogin.style.display = "none";
-        }
-
-        $(document).on('click','.likes-noAcc',function(){
-            modalLogin.style.display = "block";
-        });
-
-        $(document).on('click','.follow-noAcc',function(){
-            modalLogin.style.display = "block";
-        });
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modalLogin.style.display = "none";
-            }
-        }
-    </script>
-
-    <script>
-        var modal = document.getElementById("div-modal");
-
-        var btn = document.getElementById("modal");
-
-        function closeModal() {
-            modal.style.display = "none";
-        }
-
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    <script src="js/modal.js"></script>
 </body>
 </html>

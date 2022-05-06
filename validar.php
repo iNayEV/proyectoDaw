@@ -18,8 +18,12 @@
             session_start();
         
             $_SESSION["user"] = $username;
-    
-            header("location:index.php");
+
+            if(isset($_POST["user"])) {
+                header("location:".$_POST["page"].".php?username=".$_POST["user"]);
+            }else {
+                header("location:".$_POST["page"].".php");
+            } 
         } else {
             header("location:login.php?error=1");
         }

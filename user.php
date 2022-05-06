@@ -4,18 +4,28 @@
     <?php
         session_start();
         include("sql/connect.php");
-        include("head.php");
+        include("include/head.php");
     ?>
     <link rel="stylesheet" href="css/user.css">
 </head>
 <body>
     <?php
-        include("header.php");
-    ?>
+        include("include/header.php");
+        if(!isset($_SESSION["user"])) {
+            ?>
+                <a href="login.php?page=user&username=<?php echo $_REQUEST["username"] ?>" class="c-pointer" style="margin-right: 1.25rem;"><button class="btn2 btn-login">Iniciar sesión</button></a>
+                <?php
+        }else{
+            include("include/header2.php");
+        } ?>
+        </div>
+        </div>
+        </header>
+
     <div class="container mt-custom">
         <div class="row">
             <?php
-                include("feed-left.php");
+                include("include/feed-left.php");
             ?>
             <div class="col-sm-8 theme-dark p-custom full-height">
                 <div class="mb-5 posts-list padding-20">
@@ -79,7 +89,20 @@
         </div>
     </div>
 
+    <?php include("include/modal-logout1.php") ?>
+    <form action="logout.php?page=user&username=<?php echo $_REQUEST["username"] ?>" method="POST">
+    <?php include("include/modal-logout2.php") ?>
+
+    <?php include("include/modal-login1.php") ?>
+    <a href="login.php?page=user&username=<?php echo $_REQUEST["username"] ?>" class="text-dec-none">
+    <?php include("include/modal-login2.php") ?>
+
+    <?php include("include/button.php") ?>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/theme.js"></script>
     <script src="js/follow.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/button.js"></script>
 </body>
 </html>
