@@ -257,17 +257,23 @@
                                                         
                                                         if($rows < 1) {
                                                             ?>
-                                                                <button class="btn2 btn-outline-blue mr-custom <?php if (!isset($_SESSION["user"])) { echo "follow-noAcc"; }else{ echo "follow"; } ?>" id="<?php echo $reg["id_user"] ?>">
+                                                                <button class="btn2 btn-outline-blue mr-custom follow" id="<?php echo $reg["id_user"] ?>">
                                                                     Seguir
                                                                 </button>
                                                             <?php
                                                         } else {
                                                             ?>
-                                                                <button class="btn2 btn-outline-red mr-custom unfollow">
+                                                                <button class="btn2 btn-outline-red mr-custom unfollow" id="<?php echo $reg["id_user"] ?>">
                                                                     Dejar de seguir
                                                                 </button>
                                                             <?php
                                                         }
+                                                    } else {
+                                                        ?>
+                                                            <button class="btn2 btn-outline-blue mr-custom follow-noAcc">
+                                                                Seguir
+                                                            </button>
+                                                        <?php
                                                     }
                                                 ?>
                                             </div>
@@ -459,6 +465,26 @@
                         $('.ajax-follow').append(html);
                     }
                 });
+                document.location.reload('.ajax-follow');
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document).on('click','.unfollow',function(){
+                console.log($(this).attr("id"));
+                var ID = $(this).attr('id');
+                $.ajax({
+                    type:'POST',
+                    url:'unfollow.php',
+                    data:'id='+ID,
+                    success:function(html){
+                        $('.button-follow').remove();
+                        $('.ajax-follow').append(html);
+                    }
+                });
+                document.location.reload('.ajax-follow');
             });
         });
     </script>

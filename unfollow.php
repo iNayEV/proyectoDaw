@@ -10,7 +10,7 @@
 
     $id_user = $user["id_user"];
 
-    $sql = "INSERT INTO follows VALUE (null,$id_user,$id_poster)";
+    $sql = "DELETE FROM follows WHERE id_user=$id_user AND id_poster=$id_poster";
     $result = mysqli_query($con, $sql);
     
     ?>
