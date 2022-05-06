@@ -28,7 +28,7 @@
                 include("include/feed-left.php");
             ?>
             <div class="col-sm-8 theme-dark p-custom full-height">
-                <div class="mb-5 posts-list padding-20">
+                <div class="posts-list padding-20">
                     <?php
                         $sql = "SELECT * FROM users WHERE username='".$_REQUEST["username"]."'";
                         $result = mysqli_query($con, $sql);
@@ -41,42 +41,88 @@
                                 <span>@<?php echo $reg["username"] ?></span>
                                 <p class="desc"><?php echo $reg["prof_descrip"] ?></p>
                                 <?php 
-                                if (isset($_SESSION["user"])) {
-                                    $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
-                                    $result = mysqli_query($con, $sql);
-                                    $user = mysqli_fetch_array($result);
-                                    $sql = "SELECT * FROM follows WHERE id_poster='".$reg["id_user"]."' AND id_user='".$user["id_user"]."'";
-                                    $result = mysqli_query($con, $sql);
-                                    
-                                    $rows = mysqli_num_rows($result);
-                                    
-                                    if($rows < 1) {
+                                if ($_SESSION["user"] != $_REQUEST["username"]) {
+                                    if (isset($_SESSION["user"])) {
+                                        $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
+                                        $result = mysqli_query($con, $sql);
+                                        $user = mysqli_fetch_array($result);
+                                        $sql = "SELECT * FROM follows WHERE id_poster='".$reg["id_user"]."' AND id_user='".$user["id_user"]."'";
+                                        $result = mysqli_query($con, $sql);
+                                        
+                                        $rows = mysqli_num_rows($result);
+                                        
+                                        if($rows < 1) {
+                                            ?>
+                                                <button class="btn2 btn-outline-blue follow" id="<?php echo $reg["id_user"] ?>">
+                                                    Seguir
+                                                </button>
+                                            <?php
+                                        } else {
+                                            ?>
+                                                <button class="btn2 btn-outline-red unfollow" id="<?php echo $reg["id_user"] ?>">
+                                                    Dejar de seguir
+                                                </button>
+                                            <?php
+                                        }
+                                    } else {
                                         ?>
-                                            <button class="btn2 btn-outline-blue follow" id="<?php echo $reg["id_user"] ?>">
+                                            <button class="btn2 btn-outline-blue follow-noAcc">
                                                 Seguir
                                             </button>
                                         <?php
-                                    } else {
-                                        ?>
-                                            <button class="btn2 btn-outline-red unfollow" id="<?php echo $reg["id_user"] ?>">
-                                                Dejar de seguir
-                                            </button>
-                                        <?php
                                     }
-                                } else {
-                                    ?>
-                                        <button class="btn2 btn-outline-blue follow-noAcc">
-                                            Seguir
-                                        </button>
-                                    <?php
                                 } ?>
                                 <div class="posts-list-content">
                                 <?php
                                 $sql = "SELECT * FROM posts WHERE id_user=".$reg["id_user"];
                                 $result = mysqli_query($con, $sql);
-                                while ($reg = mysqli_fetch_array($result)) {
+                                $rows = mysqli_num_rows($result);
+                                
+                                if ($_SESSION["user"] == $_REQUEST["username"]) {
                                     ?>
-                                        <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
+                                        <div class="div-ul">
+                                            <ul class="d-flex space-between">
+                                                <li class="line" id="photos" onclick="moveLineLeft()">
+                                                    Mis fotos
+                                                </li>
+                                                <li id="likes" onclick="moveLineRight()">
+                                                    Likes
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="post-likes-content">
+                                            <div class="remove-content">
+                                                <?php
+                                                if($rows > 0) {
+                                                    while ($reg = mysqli_fetch_array($result)) {
+                                                        ?>
+                                                            <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
+                                                        <?php
+                                                    }
+                                                } else {
+                                                    ?>
+                                                    <div id="post">
+                                                        Aún no has realizado ninguna publicación
+                                                    </div>
+                                                    <?php
+                                                } ?>
+                                                <div class="likes"></div>
+                                            </div>
+                                        </div>
+                                    <?php
+                                }
+
+                                if($rows > 0) {
+                                    while ($reg = mysqli_fetch_array($result)) {
+                                        ?>
+                                            <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
+                                        <?php
+                                    }
+                                } elseif ($_SESSION["user"] != $_REQUEST["username"]) {
+                                    ?>
+                                        <div id="post">
+                                            Este usuario no tiene publicaciones
+                                        </div>
                                     <?php
                                 }
                             ?> </div> <?php
@@ -104,5 +150,22 @@
     <script src="js/follow.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/button.js"></script>
+    <script src="js/show_likes.js"></script>
+    <script>
+        function moveLineRight() {
+            var likes = document.getElementById("likes");
+            var photos = document.getElementById("photos");
+            likes.classList.add("line2");
+            photos.classList.remove("line");
+            photos.classList.remove("line3");
+        }
+
+        function moveLineLeft() {
+            var likes = document.getElementById("likes");
+            var photos = document.getElementById("photos");
+            likes.classList.remove("line2");
+            photos.classList.add("line3");
+        }
+    </script>
 </body>
 </html>

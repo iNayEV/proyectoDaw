@@ -25,7 +25,7 @@
                                                         </div>                                                            
                                                         <div class="t-center mb-custom">
                                                             <hr class="hr-prof">
-                                                            <a href="#" class="c-pointer"><button class="btn2 btn-outline-blue mb-2 w-90">Editar perfil</button></a><br>
+                                                            <a href="user.php?username=<?php echo $_SESSION["user"] ?>" class="c-pointer"><button class="btn2 btn-outline-blue mb-2 w-90">Ver mi perfil</button></a><br>
                                                             <button class="btn2 btn-outline-red w-90" id="modal">Cerrar sesión</button>
                                                             <div class="row d-flex">
                                                                 <div class="col-sm-6">
