@@ -29,8 +29,39 @@
                                 <img src="<?php echo $reg["prof_img"] ?>" class="user-pic">
                                 <h3><?php echo $reg["firstname"]." ".$reg["lastname"] ?></h3>
                                 <span>@<?php echo $reg["username"] ?></span>
+                                <p class="desc"><?php echo $reg["prof_descrip"] ?></p>
+                                <?php 
+                                if (isset($_SESSION["user"])) {
+                                    $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
+                                    $result = mysqli_query($con, $sql);
+                                    $user = mysqli_fetch_array($result);
+                                    $sql = "SELECT * FROM follows WHERE id_poster='".$reg["id_user"]."' AND id_user='".$user["id_user"]."'";
+                                    $result = mysqli_query($con, $sql);
+                                    
+                                    $rows = mysqli_num_rows($result);
+                                    
+                                    if($rows < 1) {
+                                        ?>
+                                            <button class="btn2 btn-outline-blue follow" id="<?php echo $reg["id_user"] ?>">
+                                                Seguir
+                                            </button>
+                                        <?php
+                                    } else {
+                                        ?>
+                                            <button class="btn2 btn-outline-red unfollow" id="<?php echo $reg["id_user"] ?>">
+                                                Dejar de seguir
+                                            </button>
+                                        <?php
+                                    }
+                                } else {
+                                    ?>
+                                        <button class="btn2 btn-outline-blue follow-noAcc">
+                                            Seguir
+                                        </button>
+                                    <?php
+                                } ?>
                                 <div class="posts-list-content">
-                            <?php
+                                <?php
                                 $sql = "SELECT * FROM posts WHERE id_user=".$reg["id_user"];
                                 $result = mysqli_query($con, $sql);
                                 while ($reg = mysqli_fetch_array($result)) {
@@ -47,5 +78,8 @@
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/follow.js"></script>
 </body>
 </html>
