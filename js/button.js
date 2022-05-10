@@ -6,6 +6,10 @@ function scrollUp(){
     if (currentScroll > 0){
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
+
+    setTimeout(() => {
+        document.location.reload(true);
+    }, 500);
 }
 
 buttonUp = document.getElementById("button-up");
@@ -21,3 +25,4 @@ window.onscroll = function(){
     }
     
 }
+

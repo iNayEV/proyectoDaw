@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    $(document).on('click','#likes',function(){
+    $(document).on('click','#photos',function(){
         console.log("working");
         $.ajax({
             type:'POST',
-            url:'ajax/show_likes.php',
+            url:'ajax/show_photos.php',
             success:function(html){
                 $('.remove-content').remove();
                 $('.div-content').append(html);

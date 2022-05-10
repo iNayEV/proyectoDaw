@@ -35,8 +35,12 @@
                         $reg = mysqli_fetch_array($result);
                         $rows = mysqli_num_rows($result);
                         if ($rows > 0) {
-                            ?>
-                                <img src="<?php echo $reg["prof_img"] ?>" class="user-pic">
+                            if ($_REQUEST["username"] == $_SESSION["user"]) {
+                                ?>
+                                    <a href="editar.php?username=<?php echo $_REQUEST["username"] ?>">Editar</a>
+                                <?php
+                            } ?>
+                                <img src="<?php echo $reg["prof_img"] ?>" class="prof-pic user-pic">
                                 <h3><?php echo $reg["firstname"]." ".$reg["lastname"] ?></h3>
                                 <span>@<?php echo $reg["username"] ?></span>
                                 <p class="desc"><?php echo $reg["prof_descrip"] ?></p>
@@ -53,13 +57,13 @@
                                         
                                         if($rows < 1) {
                                             ?>
-                                                <button class="btn2 btn-outline-blue follow" id="<?php echo $reg["id_user"] ?>">
+                                                <button class="btn2 btn-outline-blue follow marginb-2" id="<?php echo $reg["id_user"] ?>">
                                                     Seguir
                                                 </button>
                                             <?php
                                         } else {
                                             ?>
-                                                <button class="btn2 btn-outline-red unfollow" id="<?php echo $reg["id_user"] ?>">
+                                                <button class="btn2 btn-outline-red unfollow marginb-2" id="<?php echo $reg["id_user"] ?>">
                                                     Dejar de seguir
                                                 </button>
                                             <?php
@@ -71,15 +75,16 @@
                                             </button>
                                         <?php
                                     }
-                                } ?>
-                                <div class="posts-list-content">
-                                <?php
+                                }
+
                                 $sql = "SELECT * FROM posts WHERE id_user=".$reg["id_user"];
                                 $result = mysqli_query($con, $sql);
                                 $rows = mysqli_num_rows($result);
-                                
+
                                 if ($_SESSION["user"] == $_REQUEST["username"]) {
                                     ?>
+                                    <div class="div-content">
+                                        <div class="remove-content">
                                         <div class="div-ul">
                                             <ul class="d-flex space-between">
                                                 <li class="line" id="photos" onclick="moveLineLeft()">
@@ -90,29 +95,31 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="post-likes-content">
-                                            <div class="remove-content">
-                                                <?php
-                                                if($rows > 0) {
-                                                    while ($reg = mysqli_fetch_array($result)) {
-                                                        ?>
-                                                            <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
-                                                        <?php
-                                                    }
-                                                } else {
-                                                    ?>
-                                                    <div id="post">
-                                                        Aún no has realizado ninguna publicación
-                                                    </div>
+                                         
                                                     <?php
-                                                } ?>
-                                                <div class="likes"></div>
+                                                        if($rows > 0) {?>
+                                                            <div class="posts-list-content"><?php
+                                                            while ($reg = mysqli_fetch_array($result)) {
+                                                                ?>
+                                                                        <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
+                                                                <?php
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <div class="posts-list-content d-flex-center">
+                                                                <div id="post" class="div-center">
+                                                                    Aún no has realizado ninguna publicación
+                                                                </div>
+                                                            <?php
+                                                        } 
+                                                    ?>
+                                                </div>
                                             </div>
-                                        </div>
                                     <?php
                                 }
 
-                                if($rows > 0) {
+                                if($rows > 0) {?>
+                                    <div class="posts-list-content"> <?php
                                     while ($reg = mysqli_fetch_array($result)) {
                                         ?>
                                             <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
@@ -120,7 +127,8 @@
                                     }
                                 } elseif ($_SESSION["user"] != $_REQUEST["username"]) {
                                     ?>
-                                        <div id="post">
+                                    <div class="posts-list-content d-flex-center"> 
+                                        <div id="post" class="div-center">
                                             Este usuario no tiene publicaciones
                                         </div>
                                     <?php
@@ -151,6 +159,7 @@
     <script src="js/modal.js"></script>
     <script src="js/button.js"></script>
     <script src="js/show_likes.js"></script>
+    <script src="js/show_photos.js"></script>
     <script>
         function moveLineRight() {
             var likes = document.getElementById("likes");

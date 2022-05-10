@@ -7,7 +7,7 @@
     $result = mysqli_query($con, $sql);
     $reg = mysqli_fetch_array($result);
 
-    $sql = "SELECT * FROM likes INNER JOIN posts ON likes.id_post = posts.id_post WHERE likes.id_user=".$reg["id_user"];
+    $sql = "SELECT * FROM posts WHERE id_user=".$reg["id_user"];
     $result = mysqli_query($con, $sql);
     $rows = mysqli_num_rows($result);
 
@@ -15,23 +15,27 @@
     <div class="remove-content">
         <div class="div-ul">
             <ul class="d-flex space-between">
-                <li id="photos">
+                <li class="line3">
                     Mis fotos
                 </li>
-                <li class="line2">
+                <li id="likes">
                     Likes
                 </li>
             </ul>
         </div>
-        <div class="posts-list-content"><?php
-            if ($rows > 0) {
+        <?php
+            if($rows > 0) {
                 while ($reg = mysqli_fetch_array($result)) {
                     ?>
-                        <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
+                        <div class="posts-list-content">
+                            <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
                     <?php
                 }
             } else {?>
-                <p>Todavía no has marcado me gusta</p>
+                <div class="posts-list-content d-flex-center">
+                    <div id="post" class="div-center">
+                        Aún no has realizado ninguna publicación
+                    </div>
                 <?php
             } ?>
         </div>

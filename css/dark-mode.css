@@ -45,3 +45,19 @@ body {
     color: rgb(228, 228, 228);
     text-decoration: underline;
 }
+
+.posts-list-content {
+    background-color: #262626;
+}
+
+.primary-dark {
+    background-color: #202020;
+}
+
+.secondary-dark {
+    background-color: #262626;
+}
+
+.card {
+    border: 0px;
+}

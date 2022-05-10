@@ -52,7 +52,7 @@
                             <?php
                                 if($reg["administrator"]==1) {
                                     ?>
-                                    <a href="admin/crud/user.php" class="c-pointer ml-2rem"><button class="btn2 btn-admin">Administración</button></a>
+                                    <a href="admin/index.php" class="c-pointer ml-2rem"><button class="btn2 btn-admin">Administración</button></a>
                                     <?php
                                 }
                             ?>

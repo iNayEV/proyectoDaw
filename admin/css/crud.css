@@ -1,0 +1,31 @@
+body {
+    overflow-x: hidden;
+}
+
+.crud {
+    margin: 1rem auto;
+    width: fit-content;
+}
+
+td {
+    vertical-align: middle!important;
+}
+
+.text-blue {
+    color: skyblue;
+}
+
+.text-green {
+    color: lightgreen;
+}
+
+.text-red {
+    color: red;
+}
+
+.post {
+    object-fit: cover;
+    width: 150px;
+    height: 250px;
+    border-radius: 0.25rem;
+}
