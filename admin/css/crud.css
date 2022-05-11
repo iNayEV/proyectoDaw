@@ -29,3 +29,7 @@ td {
     height: 250px;
     border-radius: 0.25rem;
 }
+
+.text-darkblue {
+    color: #0037ff;
+}

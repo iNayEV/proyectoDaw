@@ -7,6 +7,7 @@
         include("include/head.php");
     ?>
     <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <?php
@@ -37,7 +38,7 @@
                         if ($rows > 0) {
                             if ($_REQUEST["username"] == $_SESSION["user"]) {
                                 ?>
-                                    <a href="editar.php?username=<?php echo $_REQUEST["username"] ?>">Editar</a>
+                                    <a href="editar.php?username=<?php echo $_REQUEST["username"] ?>" class="top-right btn-edit"><i class="fas fa-pen-to-square"></i></a>
                                 <?php
                             } ?>
                                 <img src="<?php echo $reg["prof_img"] ?>" class="prof-pic user-pic">
@@ -116,23 +117,25 @@
                                                 </div>
                                             </div>
                                     <?php
-                                }
+                                } else {
 
-                                if($rows > 0) {?>
-                                    <div class="posts-list-content"> <?php
-                                    while ($reg = mysqli_fetch_array($result)) {
+                                    if($rows > 0) {?>
+                                        <div class="posts-list-content"> <?php
+                                        while ($reg = mysqli_fetch_array($result)) {
+                                            ?>
+                                                <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
+                                            <?php
+                                        }
+                                    } elseif ($_SESSION["user"] != $_REQUEST["username"]) {
                                         ?>
-                                            <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
+                                        <div class="posts-list-content d-flex-center"> 
+                                            <div id="post" class="div-center">
+                                                Este usuario no tiene publicaciones
+                                            </div>
                                         <?php
                                     }
-                                } elseif ($_SESSION["user"] != $_REQUEST["username"]) {
-                                    ?>
-                                    <div class="posts-list-content d-flex-center"> 
-                                        <div id="post" class="div-center">
-                                            Este usuario no tiene publicaciones
-                                        </div>
-                                    <?php
                                 }
+
                             ?> </div> <?php
                         } else {
                             echo "usuario inexistente";

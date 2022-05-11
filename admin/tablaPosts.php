@@ -43,7 +43,7 @@ $result=mysqli_query($conexion,$sql);
 					<td><?php echo $mostrar["date"] ?></td>
 					<td><img src="../uploads/<?php echo $mostrar["post_img"] ?>" class="post"></td>
 					<td style="text-align: center;">
-						<span class="btn btn-danger btn-sm" onclick="eliminarDatos('<?php echo $mostrar['id_post'] ?>')">
+						<span class="btn btn-danger btn-sm" onclick="eliminarDatosPosts('<?php echo $mostrar['id_post'] ?>')">
 							<span class="fa fa-trash"></span>
 						</span>
 					</td>

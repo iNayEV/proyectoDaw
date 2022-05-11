@@ -23,16 +23,15 @@
                 </li>
             </ul>
         </div>
+        <div class="posts-list-content <?php if(!$rows) { echo "d-flex-center"; } ?>">
         <?php
             if($rows > 0) {
                 while ($reg = mysqli_fetch_array($result)) {
                     ?>
-                        <div class="posts-list-content">
                             <img class="post" src="uploads/<?php echo $reg["post_img"] ?>">
                     <?php
                 }
             } else {?>
-                <div class="posts-list-content d-flex-center">
                     <div id="post" class="div-center">
                         Aún no has realizado ninguna publicación
                     </div>

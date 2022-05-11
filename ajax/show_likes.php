@@ -23,7 +23,7 @@
                 </li>
             </ul>
         </div>
-        <div class="posts-list-content"><?php
+        <div class="posts-list-content <?php if(!$rows) { echo "d-flex-center"; } ?>"><?php
             if ($rows > 0) {
                 while ($reg = mysqli_fetch_array($result)) {
                     ?>
@@ -31,7 +31,9 @@
                     <?php
                 }
             } else {?>
-                <p>Todavía no has marcado me gusta</p>
+                <div id="post" class="div-center">
+                    Todavía no has marcado me gusta
+                </div>
                 <?php
             } ?>
         </div>

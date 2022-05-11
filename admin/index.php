@@ -13,7 +13,10 @@
 			<div class="col-sm-12">
 				<div class="card text-left">
 					<div class="card-header">
-						Administration Liberty
+						<p>Administration Liberty</p>
+						<span>
+							/<a href="../index.php" class="text-darkblue">index.php</a>/administration.php
+						</span>
 					</div>
 					<div class="card-body">
 						<span class="btn btn-primary" onclick="loadUsers()">
@@ -74,3 +77,27 @@
 	}
 </script>
 
+<script>
+	function eliminarDatosPosts(id_post){
+		alertify.confirm('Delete post', 'Do you want to delete this post?', function(){ 
+
+			$.ajax({
+				type:"POST",
+				data:"id_post=" + id_post,
+				url:"procesos/eliminarPost.php",
+				success:function(r){
+					if(r==1){
+						$('#tablaDatatable').load('tablaPosts.php');
+						alertify.success("Deleted!");
+					}else{
+						alertify.error("Couldn't delete...");
+					}
+				}
+			});
+
+		}
+		, function(){
+
+		});
+	}
+</script>

@@ -61,3 +61,53 @@ body {
 .card {
     border: 0px;
 }
+
+.btn-edit {
+    color: white;
+}
+
+.line::after {
+    background: white!important;
+}
+
+.line2::after {
+    background: white!important;
+}
+
+.line3::after {
+    background: white!important;
+}
+
+.login {
+    padding: 1rem;
+}
+
+.login label {
+    background-color: #181818!important;
+}
+
+.login label:hover {
+    background-color: #202020!important;
+}
+
+.login .lbl {
+    background-color: #202020!important;
+}
+
+.login .lbl:hover {
+    background-color: #222222!important;
+}
+
+.login textarea {
+    color: white;
+    background-color: #202020;
+}
+
+.login textarea:hover {
+    background-color: #222222;
+}
+
+.descrip {
+    min-width: 232px;
+    max-width: 232px;
+}
