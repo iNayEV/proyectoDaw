@@ -44,40 +44,48 @@
                                 <img src="<?php echo $reg["prof_img"] ?>" class="prof-pic user-pic">
                                 <h3><?php echo $reg["firstname"]." ".$reg["lastname"] ?></h3>
                                 <span>@<?php echo $reg["username"] ?></span>
-                                <p class="desc"><?php echo $reg["prof_descrip"] ?></p>
-                                <?php 
-                                if ($_SESSION["user"] != $_REQUEST["username"]) {
-                                    if (isset($_SESSION["user"])) {
-                                        $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
-                                        $result = mysqli_query($con, $sql);
-                                        $user = mysqli_fetch_array($result);
-                                        $sql = "SELECT * FROM follows WHERE id_poster='".$reg["id_user"]."' AND id_user='".$user["id_user"]."'";
-                                        $result = mysqli_query($con, $sql);
-                                        
-                                        $rows = mysqli_num_rows($result);
-                                        
-                                        if($rows < 1) {
-                                            ?>
-                                                <button class="btn2 btn-outline-blue follow marginb-2" id="<?php echo $reg["id_user"] ?>">
-                                                    Seguir
-                                                </button>
-                                            <?php
-                                        } else {
-                                            ?>
-                                                <button class="btn2 btn-outline-red unfollow marginb-2" id="<?php echo $reg["id_user"] ?>">
-                                                    Dejar de seguir
-                                                </button>
-                                            <?php
+                                <div class="mt-1">
+                                    <span class="desc"><?php echo $reg["prof_descrip"] ?></span>
+                                </div>
+                                <div class="mt-2 mb-2 ajax-follow">
+                                    <div class="button-follow">
+                                        <span><i class="fa-solid fa-users"></i><?php echo $reg["followers"] ?></span>
+                                        <?php 
+                                        if ($_SESSION["user"] != $_REQUEST["username"]) {
+                                            if (isset($_SESSION["user"])) {
+                                                $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
+                                                $result = mysqli_query($con, $sql);
+                                                $user = mysqli_fetch_array($result);
+                                                $sql = "SELECT * FROM follows WHERE id_poster='".$reg["id_user"]."' AND id_user='".$user["id_user"]."'";
+                                                $result = mysqli_query($con, $sql);
+                                                
+                                                $rows = mysqli_num_rows($result);
+                                                
+                                                if($rows < 1) {
+                                                    ?>
+                                                        <button class="btn2 btn-outline-blue follow marginb-2" id="<?php echo $reg["id_user"] ?>">
+                                                            Seguir
+                                                        </button>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                        <button class="btn2 btn-outline-red unfollow marginb-2" id="<?php echo $reg["id_user"] ?>">
+                                                            Dejar de seguir
+                                                        </button>
+                                                    <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                    <button class="btn2 btn-outline-blue follow-noAcc">
+                                                        Seguir
+                                                    </button>
+                                                <?php
+                                            }
                                         }
-                                    } else {
                                         ?>
-                                            <button class="btn2 btn-outline-blue follow-noAcc">
-                                                Seguir
-                                            </button>
-                                        <?php
-                                    }
-                                }
-
+                                    </div>
+                                </div>
+                                <?php
                                 $sql = "SELECT * FROM posts WHERE id_user=".$reg["id_user"];
                                 $result = mysqli_query($con, $sql);
                                 $rows = mysqli_num_rows($result);
@@ -163,6 +171,7 @@
     <script src="js/button.js"></script>
     <script src="js/show_likes.js"></script>
     <script src="js/show_photos.js"></script>
+    <script src="js/show_more.js"></script>
     <script>
         function moveLineRight() {
             var likes = document.getElementById("likes");

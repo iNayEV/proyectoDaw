@@ -11,7 +11,6 @@ $(document).ready(function(){
                 $('.ajax-follow').append(html);
             }
         });
-        document.location.reload('.ajax-follow');
     });
 });
 
@@ -28,6 +27,5 @@ $(document).ready(function(){
                 $('.ajax-follow').append(html);
             }
         });
-        document.location.reload('.ajax-follow');
     });
 });

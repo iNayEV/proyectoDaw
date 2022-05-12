@@ -32,10 +32,14 @@ if(!empty($_POST["id"])){
                 ?>
                 <li class="mb-4">
                     <div class="d-flex" style="align-items: center;">
-                        <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
+                        <a href="user.php?username=<?php echo $reg["username"] ?>">
+                            <img class="suggestedAccountIcon prof-pic" src="<?php echo $prof_img ?>">
+                        </a>    
                         <div>
                             <h6 class="mb-0 fw-bold">
-                                <?php echo $firstname ?> <?php echo $lastname ?>
+                                <a href="user.php?username=<?php echo $reg["username"] ?>" class="user-prof">
+                                    <?php echo $firstname ?> <?php echo $lastname ?>
+                                </a>
                                 <?php 
                                     if ($reg["administrator"] == 1) {
                                         ?>
