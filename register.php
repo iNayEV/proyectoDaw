@@ -18,7 +18,7 @@
     </header>
     <div class="align" style="width: 100%; height: 100%;">
         <div class="grid">
-            <form action="validate_register.php" method="POST" class="form login" enctype="multipart/form-data">
+            <form action="validate/validate_register.php" method="POST" class="form login" enctype="multipart/form-data">
                 <div class="form__field">
                     <label for="firstname"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use></svg></label>
                     <input id="firstname" type="text" name="firstname" class="form__input" placeholder="Nombre" required>

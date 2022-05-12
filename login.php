@@ -17,7 +17,7 @@
     </header>
     <div class="align" style="width: 100%; height: 100%;">
         <div class="grid">
-            <form action="validar.php" method="POST" class="form login">
+            <form action="validate/validate_login.php" method="POST" class="form login">
                 <?php 
                     if (isset($_REQUEST["username"])) {
                         ?>

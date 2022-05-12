@@ -1,92 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php
+	<?php
         session_start();
         include("sql/connect.php");
-        include("include/head.php"); 
+        include("include/head.php");
     ?>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-        <?php include("include/header.php");
-        $username = $_GET["username"];
-        if(!isset($_SESSION["user"]) || $username != $_SESSION["user"]) {
-                header("location: user.php?username=$username");
+    <?php 
+		include("include/header.php"); 
+		if(!isset($_SESSION["user"])) {
+			header("location: index.php");
         }else{
             include("include/header2.php");
         } ?>
-        </div>
+		</div>
         </div>
         </header>
-
-        <?php
-            $sql = "SELECT * FROM users WHERE username='$username'";
+        <?php 
+            $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
             $result = mysqli_query($con, $sql);
             $reg = mysqli_fetch_array($result);
         ?>
-
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <div class="card secondary-dark">
-                        <div class="card-header primary-dark">
-                            Editar datos:
-                        </div>
-                        <form class="p-4" method="POST" action="editar-user/editarProceso.php" enctype="multipart/form-data">
-                            <div class="mb-3">
-                                <label class="form-label">Nombre: </label>
-                                <input type="text" class="form-control" name="firstname" required 
-                                value="<?php echo $reg["firstname"] ?>">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Apellido: </label>
-                                <input type="text" class="form-control" name="lastname" autofocus
-                                value="<?php echo $reg["lastname"] ?>">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Email: </label>
-                                <?php $email = preg_replace('/(?:^|.@).\K|.\.[^@]*$(*SKIP)(*F)|.(?=.*?\.)/', '*', $reg['email']); ?>
-                                <input type="text" class="form-control" name="email" autofocus
-                                value="<?php echo $reg["email"] ?>">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Número (opcional): </label>
-                                <input type="text" class="form-control" name="num" autofocus
-                                value="<?php echo $reg["num"] ?>">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Descripción (opcional): </label>
-                                <textarea name="descrip" id="descrip" class="form-control"><?php echo $reg["descrip"] ?></textarea>
-                            </div>
-                            <div class="form__field mb-3">
-                                <label for="img-inp"><i class="fa-solid fa-image ico_"></i></label>
-                                <input type="file" name="prof-img" id="img-inp" class="inputfile">
-                                <label for="img-inp" class="lbl">
-                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                                    <span>
-                                        <?php
-                                            if ($reg["prof_img"] != "") {
-                                                ?>
-                                                    Cambiar imagen de perfil (opcional)
-                                                <?php
-                                            } else {
-                                                ?>
-                                                    Elige archivo... (opcional)
-                                                <?php
-                                            }
-                                        ?>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="d-grid">
-                                <input type="hidden" name="username" value="<?php echo $reg["username"] ?>">
-                                <input type="submit" class="btn btn-primary" value="Editar">
-                            </div>
-                        </form>
-                    </div>
+    <div class="align" style="width: 100%; height: 100%;">
+        <div class="grid">
+            <form action="validate/user_mod.php" method="POST" class="form login secondary-dark" enctype="multipart/form-data">
+                <div class="form__field">
+                    <label for="firstname"><i class="fa-solid fa-user ico_"></i></label>
+                    <input id="firstname" type="text" name="firstname" class="form__input" placeholder="Nombre" value="<?php echo $reg["firstname"] ?>" required>
                 </div>
-            </div>
+                <div class="form__field">
+                    <label for="lastname"><i class="fa-solid fa-user ico_"></i></label>
+                    <input id="lastname" type="text" name="lastname" class="form__input" placeholder="Apellido" value="<?php echo $reg["lastname"] ?>" required>
+                </div>
+                <div class="form__field">
+                    <label for="img-inp"><i class="fa-solid fa-image ico_"></i></label>
+                    <input type="file" name="prof-img" id="img-inp" class="inputfile" required>
+                    <label for="img-inp" class="lbl">
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                        <span>Elige archivo...</span>
+                    </label>
+                </div>
+                <div class="form__field">
+                    <label for="post-descrip">
+						<i class="fa-solid fa-comment-dots ico_"></i>
+                    </label>
+					<textarea name="post-descrip" id="prof-descrip" class="descrip" placeholder="Descripción (opcional)"><?php echo $reg["prof_descrip"] ?></textarea>
+                </div>
+                <div class="form__field">
+                    <label for="phone-number">
+                        <i class="fa-solid fa-phone ico_"></i>
+                    </label>
+                    <input id="phone-number" type="text" name="phone-number" class="form__input" placeholder="Número de teléfono (opcional)" value="<?php echo $reg["num"] ?>">
+                </div>
+                <div class="form__field">
+                    <input type="hidden" name="username" value="<?php echo $reg["username"] ?>">
+                    <input class="btn-login" type="submit" name="submit" value="Publicar">
+                </div>
+            </form>
         </div>
+    </div>
+    <script src="js/filename.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="js/theme.js"></script>
 </body>
 </html>

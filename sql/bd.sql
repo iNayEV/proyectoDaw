@@ -14,12 +14,13 @@ CREATE TABLE users (
     verify BOOLEAN,
     administrator BOOLEAN,
     prof_img VARCHAR(100),
-    mode VARCHAR(100)
+    mode VARCHAR(100),
+    followers INT
 );
 
 INSERT INTO users VALUES 
-(null,'cespin@insdanielblanxart.cat','cespin10','Cristian98','Cristian','Espinosa','674638964','Hola soy Cristian',1,1,'uploads/default-img.jpg','dark'),
-(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light');
+(null,'cespin@insdanielblanxart.cat','cespin10','Cristian98','Cristian','Espinosa','674638964','Hola soy Cristian',1,1,'uploads/default-img.jpg','dark',1000000),
+(null,'test@insdanielblanxart.cat','test','asd','test','test','674638964','Hola soy test',1,1,'uploads/default-img.jpg','light',100);
 
 CREATE TABLE posts (
     id_post INT PRIMARY KEY AUTO_INCREMENT,

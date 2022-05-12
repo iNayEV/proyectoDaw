@@ -6,12 +6,29 @@
     print_r($_FILES['prof-img']);
     echo "</pre>";
 
-    if(!isset($_SESSION["user"]) || $_SESSION["user"] != $_POST["username"] ){
+    if(!isset($_SESSION["user"]) && $_SESSION["user"] != $_POST["username"] ){
         header("location: ../index.php");
     }
 
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+
+    $descrip = $_POST["post-descrip"];
+
+    $descrip_arr = str_split($descrip);
+
+    if($descrip != "") {
+        $i = count($descrip_arr);
+        if ($descrip_arr[$i-1] != ".") {
+            $descrip = $descrip.".";
+        }
+    }
+
+    echo $descrip;
+
     if(!isset($_FILES['prof-img'])) {
-        $sql = "UPDATE users SET firstname ='".$_POST["firstname"]."', lastname = '".$_POST["lastname"]."', email = '".$_POST["email"]."', num = '".$_POST["num"]."', descrip = '".$_POST["descrip"]."' WHERE username = '".$_POST["username"]."'";
+        $sql = "UPDATE users SET firstname ='".$_POST["firstname"]."', lastname = '".$_POST["lastname"]."', num = '".$_POST["phone-number"]."', prof_descrip = '".$descrip."' WHERE username = '".$_POST["username"]."'";
         $result = mysqli_query($con, $sql);
         header("location: ../user.php?username=".$_POST["username"]);
     } else {
@@ -35,16 +52,14 @@
                     $img_upload_path = '../uploads/'.$new_img_name;
                     if(move_uploaded_file($tmp_name, $img_upload_path)) {
                         echo "<img src=".$img_upload_path.">";
+                        $sql = "UPDATE users SET firstname ='".$_POST["firstname"]."', lastname = '".$_POST["lastname"]."', num = '".$_POST["phone-number"]."', prof_descrip = '".$descrip."', prof_img = 'uploads/".$new_img_name."' WHERE username = '".$_POST["username"]."'";
+                        $result = mysqli_query($con, $sql);
+                        header("location: ../user.php?username=".$_POST["username"]."&info=updated");
                     }else {
                         echo "file no uploaded";
+                        header("location: ../user.php?username=".$_POST["username"]."&info=error_user_mod");
                     }
                 }
-
-                $sql = "UPDATE users SET firstname ='".$_POST["firstname"]."', lastname = '".$_POST["lastname"]."', email = '".$_POST["email"]."', num = '".$_POST["num"]."', prof_descrip = '".$_POST["descrip"]."', prof_img = 'uploads/".$new_img_name."' WHERE username = '".$_POST["username"]."'";
-                echo $sql;
-                $result = mysqli_query($con, $sql);
-
-                header("location: ../user.php?username=".$_POST["username"]);
             }
         }
     }

@@ -111,3 +111,12 @@ body {
     min-width: 232px;
     max-width: 232px;
 }
+
+.login input[type=text] {
+    color: white;
+    background-color: #202020!important;
+}
+
+.login input[type=text]:hover {
+    background-color: #222222!important;
+}

@@ -558,6 +558,6 @@ html {
 }
 
 .tikTok_screen_img {
-    max-width: 393px;
+    width: 393px;
     object-fit: cover;
 }
