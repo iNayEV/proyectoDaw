@@ -189,6 +189,7 @@ div.p-relative {
     position: relative;
     right: 5rem;
     top: 0.595rem;
+    min-width: 255px;
 }
 
 .drop-content {

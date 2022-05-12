@@ -7,9 +7,9 @@ function scrollUp(){
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
-    setTimeout(() => {
+    if (currentScroll == 0) {
         document.location.reload(true);
-    }, 500);
+    }
 }
 
 buttonUp = document.getElementById("button-up");
@@ -25,4 +25,5 @@ window.onscroll = function(){
     }
     
 }
+
 

@@ -253,3 +253,23 @@ label.lbl i {
 .d-flex img {
     margin-right: 1rem;
 }
+
+.google-text {
+    color: #606060;
+}
+
+.google-text:hover {
+    color: #606060;
+}
+
+.google-text:focus {
+    color: #606060;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.border-radius {
+    border-radius: 50%;
+}

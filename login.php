@@ -45,7 +45,7 @@
             <hr>
             <div>
                 <?php require ("auth.php") ?>
-                <a href="<?php echo $client->createAuthUrl() ?>" class="text-dec-none">
+                <a href="<?php echo $client->createAuthUrl() ?>" class="text-dec-none google-text">
                     <div class="google-div">
                         <span class="d-flex"><img src="uploads/google.png" width="25px" alt="">Continuar con Google</span>
                     </div>
