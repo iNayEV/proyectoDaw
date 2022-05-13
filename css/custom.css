@@ -562,3 +562,247 @@ html {
     width: 393px;
     object-fit: cover;
 }
+
+.c-pointer {
+    cursor: pointer;
+}
+
+.button-follow {
+    font-size: 21px;
+}
+
+.text-red {
+    color: red;
+}
+
+.follow-fx {
+    position: absolute;
+    opacity: 0;
+    top: 1rem;
+    right: 1rem;
+    font-size: 35px;
+    animation: follow-fx 1000ms;
+}
+
+@keyframes follow-fx {
+    0% {
+        top: 22.4rem;
+        right: 38rem;
+        opacity: 1;
+        font-size: 21px;
+    }
+
+    99% {
+        opacity: 0;
+        top: 21.6rem;
+        right: 37.5rem;
+        font-size: 35px;
+    }
+
+    100% {
+        top: 1rem;
+        right: 1rem;
+    }
+}
+
+div.follow-index {
+    margin-right: 13.7rem;
+}
+
+.follow-index div div span {
+    font-size: 30px;
+}
+
+.follow2-fx {
+    position: relative;
+    opacity: 0;
+    font-size: 0;
+}
+
+.follow2-fx-1 {
+    animation: follow2-fx-1 1000ms;
+}
+
+@keyframes follow2-fx-1 {
+    0% {
+        bottom: 0.5rem;
+        opacity: 1;
+        left: 6.5rem;
+        font-size: 20px;
+    }
+    25% {
+        left: 6rem;
+    }
+    50% {
+        left: 5.5rem;
+    }
+    100% {
+        left: 5rem;
+        bottom: 3rem;
+        font-size: 15px;
+        opacity: 0;
+    }
+}
+
+.follow2-fx-2 {
+    animation: follow2-fx-2 1000ms;
+}
+
+@keyframes follow2-fx-2 {
+    0% {
+        bottom: -0.5rem;
+        opacity: 1;
+        left: 5.5rem;
+        font-size: 15px;
+    }
+    25% {
+        left: 4.7rem;
+    }
+    50% {
+        left: 4.2rem;
+    }
+    100% {
+        left: 3.9rem;
+        bottom: 1rem;
+        font-size: 10px;
+        opacity: 0;
+    }
+}
+
+.follow2-fx-3 {
+    animation: follow2-fx-3 1000ms;
+}
+
+@keyframes follow2-fx-3 {
+    0% {
+        bottom: 1rem;
+        opacity: 1;
+        left: 5rem;
+        font-size: 25px;
+    }
+    25% {
+        left: 5rem;
+    }
+    50% {
+        left: 4.5rem;
+    }
+    100% {
+        left: 4rem;
+        bottom: 4rem;
+        font-size: 20px;
+        opacity: 0;
+    }
+}
+
+.follow2-fx-4 {
+    animation: follow2-fx-4 1000ms;
+}
+
+@keyframes follow2-fx-4 {
+    0% {
+        bottom: -1.5rem;
+        opacity: 1;
+        left: 3rem;
+        font-size: 20px;
+    }
+    25% {
+        left: 2.7rem;
+    }
+    50% {
+        left: 3.2rem;
+    }
+    100% {
+        left: 2.8rem;
+        bottom: 1rem;
+        font-size: 15px;
+        opacity: 0;
+    }
+}
+
+.unfollow-fx-1 {
+    animation: unfollow-fx-1 1500ms;
+}
+
+@keyframes unfollow-fx-1 {
+    0% {
+        bottom: 1rem;
+        opacity: 1;
+        left: 5rem;
+        font-size: 15px;
+    }
+    50% {
+        bottom: -0.25rem;
+    }
+    100% {
+        left: 3.5rem;
+        font-size: 10px;
+        opacity: 0;
+        bottom: -0.25rem;
+    }
+}
+
+.unfollow-fx-2 {
+    animation: unfollow-fx-2 1500ms;
+}
+
+@keyframes unfollow-fx-2 {
+    0% {
+        bottom: 2rem;
+        opacity: 1;
+        left: 4rem;
+        font-size: 20px;
+    }
+    50% {
+        bottom: -0.25rem;
+    }
+    100% {
+        left: 3rem;
+        font-size: 15px;
+        opacity: 0;
+        bottom: -0.25rem;
+    }
+}
+
+.unfollow-fx-3 {
+    animation: unfollow-fx-3 1500ms;
+}
+
+@keyframes unfollow-fx-3 {
+    0% {
+        bottom: 3rem;
+        opacity: 1;
+        left: 3rem;
+        font-size: 17px;
+    }
+    50% {
+        bottom: -0.25rem;
+    }
+    100% {
+        left: 2.5rem;
+        font-size: 12px;
+        opacity: 0;
+        bottom: -0.25rem;
+    }
+}
+
+.unfollow-fx-4 {
+    animation: unfollow-fx-4 1500ms;
+}
+
+@keyframes unfollow-fx-4 {
+    0% {
+        bottom: 1.5rem;
+        opacity: 1;
+        left: 2.5rem;
+        font-size: 13px;
+    }
+    50% {
+        bottom: -0.25rem;
+    }
+    100% {
+        left: 2.5rem;
+        font-size: 8px;
+        opacity: 0;
+        bottom: -0.25rem;
+    }
+}

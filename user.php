@@ -63,22 +63,22 @@
                                                 
                                                 if($rows < 1) {
                                                     ?>
-                                                        <button class="btn2 btn-outline-blue follow marginb-2" id="<?php echo $reg["id_user"] ?>">
-                                                            Seguir
-                                                        </button>
+                                                        <span class="follow marginb-2 c-pointer text-blue" id="<?php echo $reg["id_user"] ?>">
+                                                            <i class="fa-solid fa-heart-circle-plus"></i>
+                                                        </span>
                                                     <?php
                                                 } else {
                                                     ?>
-                                                        <button class="btn2 btn-outline-red unfollow marginb-2" id="<?php echo $reg["id_user"] ?>">
-                                                            Dejar de seguir
-                                                        </button>
+                                                        <span class="unfollow marginb-2 c-pointer text-red" id="<?php echo $reg["id_user"] ?>">
+                                                            <i class="fa-solid fa-heart-circle-minus"></i>
+                                                        </span>
                                                     <?php
                                                 }
                                             } else {
                                                 ?>
-                                                    <button class="btn2 btn-outline-blue follow-noAcc">
-                                                        Seguir
-                                                    </button>
+                                                    <span class="follow-noAcc marginb-2 c-pointer text-blue">
+                                                        <i class="fa-solid fa-heart-circle-plus"></i>
+                                                    </span>
                                                 <?php
                                             }
                                         }
