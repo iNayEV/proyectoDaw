@@ -5,7 +5,7 @@ require_once "clases/conexion.php";
 $obj= new conectar();
 $conexion=$obj->conexion();
 
-$sql="SELECT * FROM posts INNER JOIN users ON posts.id_user = users.id_user";
+$sql="SELECT * FROM posts INNER JOIN users ON posts.id_user = users.id_user INNER JOIN tags ON posts.id_tag = tags.id_tag";
 $result=mysqli_query($conexion,$sql);
 ?>
 
@@ -17,7 +17,7 @@ $result=mysqli_query($conexion,$sql);
 				<td>Username</td>
 				<td>Description</td>
 				<td>Likes count</td>
-				<td>Publication date</td>
+				<td>Tag</td>
 				<td>Image</td>
 				<td>Eliminar</td>
 			</tr>
@@ -28,6 +28,7 @@ $result=mysqli_query($conexion,$sql);
 				<td>Description</td>
 				<td>Likes count</td>
 				<td>Publication date</td>
+				<td>Tag</td>
 				<td>Image</td>
 				<td>Eliminar</td>
 			</tr>
@@ -40,7 +41,7 @@ $result=mysqli_query($conexion,$sql);
 					<td>@<?php echo $mostrar["username"] ?></td>
 					<td><?php echo $mostrar["post_descrip"] ?></td>
 					<td><?php echo $mostrar["likes"] ?></td>
-					<td><?php echo $mostrar["date"] ?></td>
+					<td><?php echo $mostrar["tag"] ?></td>
 					<td><img src="../uploads/<?php echo $mostrar["post_img"] ?>" class="post"></td>
 					<td style="text-align: center;">
 						<span class="btn btn-danger btn-sm" onclick="eliminarDatosPosts('<?php echo $mostrar['id_post'] ?>')">

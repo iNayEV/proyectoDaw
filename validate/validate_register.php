@@ -2,7 +2,7 @@
 
 include("sql/connect.php");
 
-$firstname = $_POST["firstname"];
+$firstname = mysqli_real_escape_string($con, $_POST["firstname"]);
 $lastname_arr = str_split($_POST["lastname"]);
 for ($i = 0; $i < count($lastname_arr); $i++) {
 	if ($lastname_arr[$i] != " ") {
@@ -12,11 +12,11 @@ for ($i = 0; $i < count($lastname_arr); $i++) {
 	}
 }
 $lastname = implode($lastname);
-$username = $_POST["username"];
-$email = $_POST["email"];
-$passwd = $_POST["passwd"];
+$username = mysqli_real_escape_string($con, $_POST["username"]);
+$email = mysqli_real_escape_string($con, $_POST["email"]);
+$passwd = mysqli_real_escape_string($con, $_POST["passwd"]);
 $hash = password_hash($passwd,PASSWORD_DEFAULT);
-$num = $_POST["phone-number"];
+$num = mysqli_real_escape_string($con, $_POST["phone-number"]);
 
 if (isset($_POST['submit']) && isset($_FILES['post-img'])) {
 

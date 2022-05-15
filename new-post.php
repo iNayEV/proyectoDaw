@@ -43,6 +43,23 @@
                     <!-- <input id="phone-number" type="text" name="phone-number" class="form__input" placeholder="Descripción (opcional)"> -->
                 </div>
                 <div class="form__field">
+                    <label for="post-tag">
+                        <i class="fa-solid fa-tag"></i>
+                    </label>
+					<select name="post-tag" id="post-tag" class="form__input" required>
+                        <?php 
+                            $sql = "SELECT * FROM tags";
+                            $result = mysqli_query($con, $sql);
+                            while ($reg = mysqli_fetch_array($result)) {
+                                ?>
+                                    <option value="<?php echo $reg["id_tag"] ?>"><?php echo $reg["name"] ?></option>
+                                <?php
+                            }
+                        ?>
+                    </select>
+                    <!-- <input id="phone-number" type="text" name="phone-number" class="form__input" placeholder="Descripción (opcional)"> -->
+                </div>
+                <div class="form__field">
                     <input class="btn-login" type="submit" name="submit" value="Publicar">
                 </div>
             </form>

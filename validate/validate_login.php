@@ -1,12 +1,13 @@
 <?php
 
+    include("../sql/connect.php");
+
     // Get username and password send by method POST
-    $username = $_POST["username"];
-    $passwd = $_POST["passwd"];
+    $username = mysqli_real_escape_string($con, $_POST["username"]);
+    $passwd = mysqli_real_escape_string($con, $_POST["passwd"]);
 
     // Start session
     
-    include("../sql/connect.php");
     $sql = "SELECT * FROM users WHERE username = '$username'";
     $result = mysqli_query($con,$sql);
     $reg = mysqli_fetch_array($result);

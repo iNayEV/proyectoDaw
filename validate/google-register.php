@@ -10,6 +10,8 @@
 </head>
 <body>
 <?php
+    include("../sql/connect.php");
+
     $prof_pic = $_REQUEST["prof-pic"];
     $firstname = $_REQUEST["firstname"];
     $lastname_arr = str_split($_REQUEST["lastname"]);
@@ -22,13 +24,12 @@
     }
     $lastname = implode($lastname);
     $email = $_REQUEST["email"];
-    $username = $_REQUEST["username"];
-    $passwd = $_REQUEST["passwd"];
+    $username = mysqli_real_escape_string($con, $_REQUEST["username"]);
+    $passwd = mysqli_real_escape_string($con, $_REQUEST["passwd"]);
     $hash = password_hash($passwd,PASSWORD_DEFAULT);
     $num = "";
     $descrip = "";
 
-    include("../sql/connect.php");
     $sql = "SELECT * FROM users WHERE username = '".$username."'";
     $result = mysqli_query($con, $sql);
     $rows = mysqli_num_rows($result);
@@ -72,7 +73,7 @@
                         <input type="hidden" name="firstname" value="<?php echo $_POST["firstname"] ?>">
                         <input type="hidden" name="lastname" value="<?php echo $_POST["lastname"] ?>">
                         <input type="hidden" name="email" value="<?php echo $_POST["email"] ?>">
-                        <div class="text-center"><span>Usuario existente</span></div>
+                        <div class="text-center div-error" id="div-error"><span>Usuario existente</span></div>
                         <div class="text-center">
                             <img src="<?php echo $_POST["prof-pic"] ?>" class="border-radius">
                         </div>
@@ -82,20 +83,6 @@
                     </form>
                 <?php
             } ?>
-
-            <!-- <form action="validate/google-register.php" method="POST" enctype="multipart/form-data" class="form login">
-                <input type="hidden" name="prof-pic" value="<?php echo $_POST["prof-pic"] ?>">
-                <input type="hidden" name="firstname" value="<?php echo $_POST["firstname"] ?>">
-                <input type="hidden" name="lastname" value="<?php echo $_POST["lastname"] ?>">
-                <input type="hidden" name="email" value="<?php echo $_POST["email"] ?>">
-                <div class="text-center"><span>Usuario existente</span></div>
-                <div class="text-center">
-                    <img src="<?php echo $_POST["prof-pic"] ?>" class="border-radius">
-                </div>
-                <h3 class="text-center"><span><?php echo $_POST["firstname"]."</span> <span>".$_POST["lastname"]."</span>" ?></h3>
-                <span><p class="text-center"><?php echo $email ?></p></span>
-                <div id="form-reg-google"></div>
-            </form> -->
         <?php
     }
 ?>
@@ -104,6 +91,12 @@
     $(document).ready(function(){
         $('#form-reg-google').load('../ajax/reg-google.php');
     });
+</script>
+<script>
+    console.log("hola");
+    setTimeout(() => {
+        document.getElementById("div-error").style.display = "none";
+    }, 3000);
 </script>
 </body>
 </html>

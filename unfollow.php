@@ -36,7 +36,6 @@
                 <div class="button-follow">
                     <span><i class="fa-solid fa-users"></i><?php echo $reg["followers"] ?></span>
                     <?php 
-                    if ($_SESSION["user"] != $_REQUEST["username"]) {
                         if (isset($_SESSION["user"])) {
                             $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
                             $result = mysqli_query($con, $sql);
@@ -66,7 +65,6 @@
                                 <?php
                             }
                         }
-                    }
                     ?>
                 </div> <?php
             }

@@ -8,7 +8,9 @@ $sql = "SELECT * FROM users WHERE username ='".$_SESSION["user"]."'";
 $result = mysqli_query($con, $sql);
 $reg = mysqli_fetch_array($result);
 
-$descrip = $_POST["post-descrip"];
+$descrip = mysqli_real_escape_string($con, $_POST["post-descrip"]);
+
+$post_tag = mysqli_real_escape_string($con, $_POST["post-tag"]);
 
 $descrip_arr = str_split($descrip);
 
@@ -41,7 +43,7 @@ if ($error === 0) {
             $img_upload_path = '../uploads/'.$new_img_name;
             if(move_uploaded_file($tmp_name, $img_upload_path)) {
                 echo "<img src=".$img_upload_path.">";
-                $sql = "INSERT INTO posts VALUES(null,".$reg["id_user"].",'$new_img_name','$descrip',0)";
+                $sql = "INSERT INTO posts VALUES(null,".$reg["id_user"].",'$new_img_name',$post_tag,'$descrip',0)";
 
                 echo $sql;
 						

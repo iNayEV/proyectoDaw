@@ -120,3 +120,11 @@ body {
 .login input[type=text]:hover {
     background-color: #222222!important;
 }
+
+a {
+    color: white!important;
+}
+
+a:hover {
+    color: rgb(214, 214, 214)!important;
+}

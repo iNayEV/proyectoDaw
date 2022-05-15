@@ -75,12 +75,18 @@ $result=mysqli_query($conexion,$sql);
 							echo '<i class="fas fa-lock"></i>';
 						}
 					?></td>
-					<td class="t-center"><img class="prof-pic prof-pic-crud" src="../<?php echo $mostrar[9] ?>" alt=""></td>
-					<!-- <td style="text-align: center;">
-						<span class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEditar" onclick="agregaFrmActualizar('<?php echo $mostrar[0] ?>')">
-							<span class="fa fa-pencil-square-o"></span>
-						</span>
-					</td> -->
+					<?php 
+						$arr = str_split($mostrar[9]);
+						if ($arr[0] == "u") {
+							?>
+								<td class="t-center"><img class="prof-pic prof-pic-crud" src="../<?php echo $mostrar[9] ?>" alt=""></td>
+							<?php
+						} else {
+							?>
+								<td class="t-center"><img class="prof-pic prof-pic-crud" src="<?php echo $mostrar[9] ?>" alt=""></td>
+							<?php
+						}
+					?>
 					<td style="text-align: center;">
 						<span class="btn btn-danger btn-sm" onclick="eliminarDatos('<?php echo $mostrar[0] ?>')">
 							<span class="fa fa-trash"></span>

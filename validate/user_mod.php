@@ -14,7 +14,7 @@
     print_r($_POST);
     echo "</pre>";
 
-    $descrip = $_POST["post-descrip"];
+    $descrip = mysqli_real_escape_string($con, $_POST["post-descrip"]);
 
     $descrip_arr = str_split($descrip);
 
@@ -28,7 +28,7 @@
     echo $descrip;
 
     if(!isset($_FILES['prof-img'])) {
-        $sql = "UPDATE users SET firstname ='".$_POST["firstname"]."', lastname = '".$_POST["lastname"]."', num = '".$_POST["phone-number"]."', prof_descrip = '".$descrip."' WHERE username = '".$_POST["username"]."'";
+        $sql = "UPDATE users SET firstname ='".mysqli_real_escape_string($con, $_POST["firstname"])."', lastname = '".mysqli_real_escape_string($con, $_POST["lastname"])."', num = '".mysqli_real_escape_string($con, $_POST["phone-number"])."', prof_descrip = '".$descrip."' WHERE username = '".mysqli_real_escape_string($con, $_POST["username"])."'";
         $result = mysqli_query($con, $sql);
         header("location: ../user.php?username=".$_POST["username"]);
     } else {

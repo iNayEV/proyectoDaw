@@ -36,7 +36,6 @@
                 <div class="button-follow">
                     <span><i class="fa-solid fa-users"></i><?php echo $reg["followers"] ?></span>
                     <?php 
-                    if ($_SESSION["user"] != $_REQUEST["username"]) {
                         if (isset($_SESSION["user"])) {
                             $sql = "SELECT * FROM users WHERE username='".$_SESSION["user"]."'";
                             $result = mysqli_query($con, $sql);
@@ -48,25 +47,24 @@
                             
                             if($rows < 1) {
                                 ?>
-                                    <span class="unfollow marginb-2 c-pointer text-red follow-fx" id="<?php echo $reg["id_user"] ?>">
-                                        <i class="fa-solid fa-heart-circle-minus"></i>
-                                    </span>
                                     <span class="follow marginb-2 c-pointer text-blue" id="<?php echo $reg["id_user"] ?>">
                                         <i class="fa-solid fa-heart-circle-plus"></i>
+                                    </span>
+                                    <span class="unfollow marginb-2 c-pointer text-red follow-fx" id="<?php echo $reg["id_user"] ?>">
+                                        <i class="fa-solid fa-heart-circle-minus"></i>
                                     </span>
                                 <?php
                             } else {
                                 ?>
-                                    <span class="marginb-2 c-pointer text-blue follow-fx" id="<?php echo $reg["id_user"] ?>">
-                                        <i class="fa-solid fa-heart-circle-plus"></i>
-                                    </span>
                                     <span class="unfollow marginb-2 c-pointer text-red" id="<?php echo $reg["id_user"] ?>">
                                         <i class="fa-solid fa-heart-circle-minus"></i>
+                                    </span>
+                                    <span class="marginb-2 c-pointer text-blue follow-fx" id="<?php echo $reg["id_user"] ?>">
+                                        <i class="fa-solid fa-heart-circle-plus"></i>
                                     </span>
                                 <?php
                             }
                         }
-                    }
                     ?>
                 </div> <?php
             }
